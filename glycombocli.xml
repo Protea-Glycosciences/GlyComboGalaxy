@@ -73,34 +73,82 @@
         
         ## Modified sialic acid parameters
         #if $modified_sialic_acid_settings.enable_modified_sialic:
-            --lNeuAcMin '$modified_sialic_acid_settings.lNeuAcMin'
-            --lNeuAcMax '$modified_sialic_acid_settings.lNeuAcMax'
-            --eeNeuAcMin '$modified_sialic_acid_settings.eeNeuAcMin'
-            --eeNeuAcMax '$modified_sialic_acid_settings.eeNeuAcMax'
-            --dNeuAcMin '$modified_sialic_acid_settings.dNeuAcMin'
-            --dNeuAcMax '$modified_sialic_acid_settings.dNeuAcMax'
-            --amNeuAcMin '$modified_sialic_acid_settings.amNeuAcMin'
-            --amNeuAcMax '$modified_sialic_acid_settings.amNeuAcMax'
-            --lNeuGcMin '$modified_sialic_acid_settings.lNeuGcMin'
-            --lNeuGcMax '$modified_sialic_acid_settings.lNeuGcMax'
-            --eeNeuGcMin '$modified_sialic_acid_settings.eeNeuGcMin'
-            --eeNeuGcMax '$modified_sialic_acid_settings.eeNeuGcMax'
-            --dNeuGcMin '$modified_sialic_acid_settings.dNeuGcMin'
-            --dNeuGcMax '$modified_sialic_acid_settings.dNeuGcMax'
-            --amNeuGcMin '$modified_sialic_acid_settings.amNeuGcMin'
-            --amNeuGcMax '$modified_sialic_acid_settings.amNeuGcMax'
+            #if $modified_sialic_acid_settings.lNeuAcMin:
+                --lNeuAcMin '$modified_sialic_acid_settings.lNeuAcMin'
+            #end if
+            #if $modified_sialic_acid_settings.lNeuAcMax:
+                --lNeuAcMax '$modified_sialic_acid_settings.lNeuAcMax'
+            #end if
+            #if $modified_sialic_acid_settings.eeNeuAcMin:
+                --eeNeuAcMin '$modified_sialic_acid_settings.eeNeuAcMin'
+            #end if
+            #if $modified_sialic_acid_settings.eeNeuAcMax:
+                --eeNeuAcMax '$modified_sialic_acid_settings.eeNeuAcMax'
+            #end if
+            #if $modified_sialic_acid_settings.dNeuAcMin:
+                --dNeuAcMin '$modified_sialic_acid_settings.dNeuAcMin'
+            #end if
+            #if $modified_sialic_acid_settings.dNeuAcMax:
+                --dNeuAcMax '$modified_sialic_acid_settings.dNeuAcMax'
+            #end if
+            #if $modified_sialic_acid_settings.amNeuAcMin:
+                --amNeuAcMin '$modified_sialic_acid_settings.amNeuAcMin'
+            #end if
+            #if $modified_sialic_acid_settings.amNeuAcMax:
+                --amNeuAcMax '$modified_sialic_acid_settings.amNeuAcMax'
+            #end if
+            #if $modified_sialic_acid_settings.lNeuGcMin:
+                --lNeuGcMin '$modified_sialic_acid_settings.lNeuGcMin'
+            #end if
+            #if $modified_sialic_acid_settings.lNeuGcMax:
+                --lNeuGcMax '$modified_sialic_acid_settings.lNeuGcMax'
+            #end if
+            #if $modified_sialic_acid_settings.eeNeuGcMin:
+                --eeNeuGcMin '$modified_sialic_acid_settings.eeNeuGcMin'
+            #end if
+            #if $modified_sialic_acid_settings.eeNeuGcMax:
+                --eeNeuGcMax '$modified_sialic_acid_settings.eeNeuGcMax'
+            #end if
+            #if $modified_sialic_acid_settings.dNeuGcMin:
+                --dNeuGcMin '$modified_sialic_acid_settings.dNeuGcMin'
+            #end if
+            #if $modified_sialic_acid_settings.dNeuGcMax:
+                --dNeuGcMax '$modified_sialic_acid_settings.dNeuGcMax'
+            #end if
+            #if $modified_sialic_acid_settings.amNeuGcMin:
+                --amNeuGcMin '$modified_sialic_acid_settings.amNeuGcMin'
+            #end if
+            #if $modified_sialic_acid_settings.amNeuGcMax:
+                --amNeuGcMax '$modified_sialic_acid_settings.amNeuGcMax'
+            #end if
         #end if
         
         ## Chemical modifications
-        --phosMin '$modifications.phosMin'
-        --phosMax '$modifications.phosMax'
-        --sulfMin '$modifications.sulfMin'
-        --sulfMax '$modifications.sulfMax'
-        --dHexNAcMin '$modifications.dHexNAcMin'
-        --dHexNAcMax '$modifications.dHexNAcMax'
-        --acetylMin '$modifications.acetylMin'
-        --acetylMax '$modifications.acetylMax'
-        
+        #if $modifications.phosMin:
+            --phosMin '$modifications.phosMin'
+        #end if
+        #if $modifications.phosMax:
+            --phosMax '$modifications.phosMax'
+        #end if
+        #if $modifications.sulfMin:
+            --sulfMin '$modifications.sulfMin'
+        #end if
+        #if $modifications.sulfMax:
+            --sulfMax '$modifications.sulfMax'
+        #end if
+        #if $modifications.dHexNAcMin:
+            --dHexNAcMin '$modifications.dHexNAcMin'
+        #end if
+        #if $modifications.dHexNAcMax:
+            --dHexNAcMax '$modifications.dHexNAcMax'
+        #end if
+        #if $modifications.acetylMin:
+            --acetylMin '$modifications.acetylMin'
+        #end if
+        #if $modifications.acetylMax:
+            --acetylMax '$modifications.acetylMax'
+        #end if
+                
         ## Custom monosaccharides
         #if $custom_mono_settings.enable_custom_mono:
             #if $custom_mono_settings.custom_mono1.enable_mono1:
