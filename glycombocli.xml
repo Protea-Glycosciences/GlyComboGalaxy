@@ -1,12 +1,12 @@
 <tool id="GlyComboCLI" name="GlyComboCLI" version="0.1+galaxy.0" profile="20.01" license="Apache2.0">
-  <macros>
-    <import>macros.xml</import>
-  </macros>
-<description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
-<requirements>
-<container type="docker">proteaglycosciences/glycombocli:v1</container>
-</requirements>
-<command detect_errors="exit_code">
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
+    <requirements>
+        <container type="docker">proteaglycosciences/glycombocli:v1</container>
+    </requirements>
+    <command detect_errors="exit_code">
 <![CDATA[
 
 /app/GlyComboCLI 
@@ -239,179 +239,256 @@
 
 ]]>
 </command>
-<inputs>
-<param format="mzml,txt" name="input" type="data" label="Input mass spectrometry data" help="Accepts mzML files or text files containing mass lists"/>
-<section name="general_settings" title="General Analysis Settings" expanded="true">
-<param name="derivatisation" type="select" label="Derivatisation method">
-<expand macro="derivatisation"/>
-</param>
-<param name="reducedEnd" type="select" label="Reducing end format">
-<expand macro="reducing_ends"/>
-</param>
-<param name="adducts" type="select" label="Adduct type">
-<expand macro="adducts"/>
-</param>
-<param name="massError" type="float" value="0.6" label="Mass Error" help="Mass error tolerance value in the units specified by Mass Error Type">
-<validator type="in_range" min="0.0"/>
-</param>
-<param name="massErrorType" type="select" label="Mass error type">
-<expand macro="mass_error"/>
-</param>
-<param name="offByOne" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable off-by-one searching" help="For cases of incorrect monoisotopic precursor determination"/>
-</section>
-<section name="hex_settings" title="Common Monosaccharide Settings" expanded="true">
-<param name="hexMin" type="integer" min="0" value="0" label="Minimum hexose count"/>
-<param name="hexMax" type="integer" min="0" value="0" label="Maximum hexose count"/>
-<param name="hexNAcMin" type="integer" min="0" value="0" label="Minimum N-acetyl hexosamine count"/>
-<param name="hexNAcMax" type="integer" min="0" value="0" label="Maximum N-acetyl hexosamine count"/>
-<param name="dHexMin" type="integer" min="0" value="0" label="Minimum deoxyhexose count"/>
-<param name="dHexMax" type="integer" min="0" value="0" label="Maximum deoxyhexose count"/>
-<param name="hexAMin" type="integer" min="0" value="0" label="Minimum hexuronic acid count"/>
-<param name="hexAMax" type="integer" min="0" value="0" label="Maximum hexuronic acid count"/>
-<param name="hexNMin" type="integer" min="0" value="0" label="Minimum hexosamine count"/>
-<param name="hexNMax" type="integer" min="0" value="0" label="Maximum hexosamine count"/>
-<param name="pentMin" type="integer" min="0" value="0" label="Minimum pentose count"/>
-<param name="pentMax" type="integer" min="0" value="0" label="Maximum pentose count"/>
-</section>
-<section name="sialic_acid_settings" title="Sialic Acid Settings" expanded="true">
-<param name="kdnMin" type="integer" min="0" value="0" label="Minimum KDN count"/>
-<param name="kdnMax" type="integer" min="0" value="0" label="Maximum KDN count"/>
-<param name="neu5AcMin" type="integer" min="0" value="0" label="Minimum N-acetyl-neuraminic acid count"/>
-<param name="neu5AcMax" type="integer" min="0" value="0" label="Maximum N-acetyl-neuraminic acid count"/>
-<param name="neu5GcMin" type="integer" min="0" value="0" label="Minimum N-glycolyl-neuraminic acid count"/>
-<param name="neu5GcMax" type="integer" min="0" value="0" label="Maximum N-glycolyl-neuraminic acid count"/>
-</section>
-<section name="modified_sialic_acid_settings" title="Modified Sialic Acid Settings" expanded="false">
-<param name="enable_modified_sialic" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable modified sialic acid settings"/>
-<param name="lNeuAcMin" type="integer" min="0" value="0" label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count"/>
-<param name="lNeuAcMax" type="integer" min="0" value="0" label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count"/>
-<param name="eeNeuAcMin" type="integer" min="0" value="0" label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count"/>
-<param name="eeNeuAcMax" type="integer" min="0" value="0" label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count"/>
-<param name="dNeuAcMin" type="integer" min="0" value="0" label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count"/>
-<param name="dNeuAcMax" type="integer" min="0" value="0" label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count"/>
-<param name="amNeuAcMin" type="integer" min="0" value="0" label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count"/>
-<param name="amNeuAcMax" type="integer" min="0" value="0" label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count"/>
-<param name="lNeuGcMin" type="integer" min="0" value="0" label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count"/>
-<param name="lNeuGcMax" type="integer" min="0" value="0" label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count"/>
-<param name="eeNeuGcMin" type="integer" min="0" value="0" label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count"/>
-<param name="eeNeuGcMax" type="integer" min="0" value="0" label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count"/>
-<param name="dNeuGcMin" type="integer" min="0" value="0" label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count"/>
-<param name="dNeuGcMax" type="integer" min="0" value="0" label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count"/>
-<param name="amNeuGcMin" type="integer" min="0" value="0" label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count"/>
-<param name="amNeuGcMax" type="integer" min="0" value="0" label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count"/>
-</section>
-<section name="modifications" title="Chemical Modifications" expanded="false">
-<param name="phosMin" type="integer" min="0" value="0" label="Minimum phosphate count"/>
-<param name="phosMax" type="integer" min="0" value="0" label="Maximum phosphate count"/>
-<param name="sulfMin" type="integer" min="0" value="0" label="Minimum sulfate count"/>
-<param name="sulfMax" type="integer" min="0" value="0" label="Maximum sulfate count"/>
-<param name="dHexNAcMin" type="integer" min="0" value="0" label="Minimum N-acetyl deoxyhexose count"/>
-<param name="dHexNAcMax" type="integer" min="0" value="0" label="Maximum N-acetyl deoxyhexose count"/>
-<param name="acetylMin" type="integer" min="0" value="0" label="Minimum acetylation count"/>
-<param name="acetylMax" type="integer" min="0" value="0" label="Maximum acetylation count"/>
-</section>
-<section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
-<param name="enable_custom_mono" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide settings"/>
-<section name="custom_mono1" title="Custom Monosaccharide 1" expanded="false">
-<param name="enable_mono1" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide 1"/>
-<param name="customMono1Name" type="text" value="" label="Name of first custom monosaccharide"/>
-<param name="customMono1CCount" type="integer" min="0" value="0" label="Carbon count"/>
-<param name="customMono1HCount" type="integer" min="0" value="0" label="Hydrogen count"/>
-<param name="customMono1NCount" type="integer" min="0" value="0" label="Nitrogen count"/>
-<param name="customMono1OCount" type="integer" min="0" value="0" label="Oxygen count"/>
-<param name="customMono1Mass" type="float" value="0.0" label="Mass"/>
-<param name="customMono1Min" type="integer" min="0" value="0" label="Minimum count"/>
-<param name="customMono1Max" type="integer" min="0" value="0" label="Maximum count"/>
-</section>
-<section name="custom_mono2" title="Custom Monosaccharide 2" expanded="false">
-<param name="enable_mono2" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide 2"/>
-<param name="customMono2Name" type="text" value="" label="Name of second custom monosaccharide"/>
-<param name="customMono2CCount" type="integer" min="0" value="0" label="Carbon count"/>
-<param name="customMono2HCount" type="integer" min="0" value="0" label="Hydrogen count"/>
-<param name="customMono2NCount" type="integer" min="0" value="0" label="Nitrogen count"/>
-<param name="customMono2OCount" type="integer" min="0" value="0" label="Oxygen count"/>
-<param name="customMono2Mass" type="float" value="0.0" label="Mass"/>
-<param name="customMono2Min" type="integer" min="0" value="0" label="Minimum count"/>
-<param name="customMono2Max" type="integer" min="0" value="0" label="Maximum count"/>
-</section>
-<section name="custom_mono3" title="Custom Monosaccharide 3" expanded="false">
-<param name="enable_mono3" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide 3"/>
-<param name="customMono3Name" type="text" value="" label="Name of third custom monosaccharide"/>
-<param name="customMono3CCount" type="integer" min="0" value="0" label="Carbon count"/>
-<param name="customMono3HCount" type="integer" min="0" value="0" label="Hydrogen count"/>
-<param name="customMono3NCount" type="integer" min="0" value="0" label="Nitrogen count"/>
-<param name="customMono3OCount" type="integer" min="0" value="0" label="Oxygen count"/>
-<param name="customMono3Mass" type="float" value="0.0" label="Mass"/>
-<param name="customMono3Min" type="integer" min="0" value="0" label="Minimum count"/>
-<param name="customMono3Max" type="integer" min="0" value="0" label="Maximum count"/>
-</section>
-<section name="custom_mono4" title="Custom Monosaccharide 4" expanded="false">
-<param name="enable_mono4" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide 4"/>
-<param name="customMono4Name" type="text" value="" label="Name of fourth custom monosaccharide"/>
-<param name="customMono4CCount" type="integer" min="0" value="0" label="Carbon count"/>
-<param name="customMono4HCount" type="integer" min="0" value="0" label="Hydrogen count"/>
-<param name="customMono4NCount" type="integer" min="0" value="0" label="Nitrogen count"/>
-<param name="customMono4OCount" type="integer" min="0" value="0" label="Oxygen count"/>
-<param name="customMono4Mass" type="float" value="0.0" label="Mass"/>
-<param name="customMono4Min" type="integer" min="0" value="0" label="Minimum count"/>
-<param name="customMono4Max" type="integer" min="0" value="0" label="Maximum count"/>
-</section>
-<section name="custom_mono5" title="Custom Monosaccharide 5" expanded="false">
-<param name="enable_mono5" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom monosaccharide 5"/>
-<param name="customMono5Name" type="text" value="" label="Name of fifth custom monosaccharide"/>
-<param name="customMono5CCount" type="integer" min="0" value="0" label="Carbon count"/>
-<param name="customMono5HCount" type="integer" min="0" value="0" label="Hydrogen count"/>
-<param name="customMono5NCount" type="integer" min="0" value="0" label="Nitrogen count"/>
-<param name="customMono5OCount" type="integer" min="0" value="0" label="Oxygen count"/>
-<param name="customMono5Mass" type="float" value="0.0" label="Mass"/>
-<param name="customMono5Min" type="integer" min="0" value="0" label="Minimum count"/>
-<param name="customMono5Max" type="integer" min="0" value="0" label="Maximum count"/>
-</section>
-</section>
-<section name="reducing_end_settings" title="Custom Reducing End Settings" expanded="false">
-<param name="enable_custom_reducing" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom reducing end settings"/>
-<param name="customReducingMass" type="float" value="0.0" label="Mass of custom reducing end"/>
-<param name="customReducingName" type="text" value="" label="Name of custom reducing end"/>
-<param name="customReducedMassOutput" type="text" value="" label="Output for reduced mass"/>
-<param name="customReducingCCount" type="text" value="" label="Carbon count"/>
-<param name="customReducingHCount" type="text" value="" label="Hydrogen count"/>
-<param name="customReducingNCount" type="text" value="" label="Nitrogen count"/>
-<param name="customReducingOCount" type="text" value="" label="Oxygen count"/>
-</section>
-<section name="adduct_settings" title="Custom Adduct Settings" expanded="false">
-<param name="enable_custom_adduct" type="boolean" truevalue="true" falsevalue="false" checked="false" label="Enable custom adduct settings"/>
-<param name="customAdductPolarity" type="select" label="Polarity">
-<option value="Positive">Positive</option>
-<option value="Negative">Negative</option>
-</param>
-<param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct"/>
-</section>
-</inputs>
-<outputs>
-<data name="output_csv" format="csv" label="${tool.name} on ${on_string}: Results in CSV"/>
-<data name="output_txt" format="txt" label="${tool.name} on ${on_string}: Parameters TXT"/>
-</outputs>
-<tests>
-<test>
-<param name="input" value="text_test.txt"/>
-<section name="general_settings">
-<param name="derivatisation" value="native"/>
-<param name="reducedEnd" value="free"/>
-<param name="massError" value="0.6"/>
-<param name="massErrorType" value="da"/>
-<param name="adducts" value="Neutral"/>
-</section>
-<section name="hex_settings">
-<param name="hexMax" value="9"/>
-<param name="hexNAcMax" value="4"/>
-</section>
-<output name="output_csv" file="example_output.csv"/>
-</test>
-</tests>
-<help>
+    <inputs>
+        <param format="mzml,txt" name="input" type="data" label="Input mass spectrometry data"
+            help="Accepts mzML files or text files containing mass lists" />
+        <section name="general_settings" title="General Analysis Settings" expanded="true">
+            <param name="derivatisation" type="select" label="Derivatisation method">
+                <expand macro="derivatisation" />
+            </param>
+            <param name="reducedEnd" type="select" label="Reducing end format">
+                <expand macro="reducing_ends" />
+            </param>
+            <param name="adducts" type="select" label="Adduct type">
+                <expand macro="adducts" />
+            </param>
+            <param name="massError" type="float" value="0.6" label="Mass Error"
+                help="Mass error tolerance value in the units specified by Mass Error Type">
+                <validator type="in_range" min="0.0" />
+            </param>
+            <param name="massErrorType" type="select" label="Mass error type">
+                <expand macro="mass_error" />
+            </param>
+            <param name="offByOne" type="boolean" truevalue="true" falsevalue="false"
+                checked="false" label="Enable off-by-one searching"
+                help="For cases of incorrect monoisotopic precursor determination" />
+        </section>
+        <section name="hex_settings" title="Common Monosaccharide Settings" expanded="true">
+            <param name="hexMin" type="integer" min="0" value="0" label="Minimum hexose count" />
+            <param name="hexMax" type="integer" min="0" value="0" label="Maximum hexose count" />
+            <param name="hexNAcMin" type="integer" min="0" value="0"
+                label="Minimum N-acetyl hexosamine count" />
+            <param name="hexNAcMax" type="integer" min="0" value="0"
+                label="Maximum N-acetyl hexosamine count" />
+            <param name="dHexMin" type="integer" min="0" value="0" label="Minimum deoxyhexose count" />
+            <param name="dHexMax" type="integer" min="0" value="0" label="Maximum deoxyhexose count" />
+            <param name="hexAMin" type="integer" min="0" value="0"
+                label="Minimum hexuronic acid count" />
+            <param name="hexAMax" type="integer" min="0" value="0"
+                label="Maximum hexuronic acid count" />
+            <param name="hexNMin" type="integer" min="0" value="0" label="Minimum hexosamine count" />
+            <param name="hexNMax" type="integer" min="0" value="0" label="Maximum hexosamine count" />
+            <param name="pentMin" type="integer" min="0" value="0" label="Minimum pentose count" />
+            <param name="pentMax" type="integer" min="0" value="0" label="Maximum pentose count" />
+        </section>
+        <section name="sialic_acid_settings" title="Sialic Acid Settings" expanded="true">
+            <param name="kdnMin" type="integer" min="0" value="0" label="Minimum KDN count" />
+            <param name="kdnMax" type="integer" min="0" value="0" label="Maximum KDN count" />
+            <param name="neu5AcMin" type="integer" min="0" value="0"
+                label="Minimum N-acetyl-neuraminic acid count" />
+            <param name="neu5AcMax" type="integer" min="0" value="0"
+                label="Maximum N-acetyl-neuraminic acid count" />
+            <param name="neu5GcMin" type="integer" min="0" value="0"
+                label="Minimum N-glycolyl-neuraminic acid count" />
+            <param name="neu5GcMax" type="integer" min="0" value="0"
+                label="Maximum N-glycolyl-neuraminic acid count" />
+        </section>
+        <section name="modified_sialic_acid_settings" title="Modified Sialic Acid Settings"
+            expanded="false">
+            <param name="enable_modified_sialic" type="boolean" truevalue="true" falsevalue="false"
+                checked="false" label="Enable modified sialic acid settings" />
+            <param name="lNeuAcMin" type="integer" min="0" value="0"
+                label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+            <param name="lNeuAcMax" type="integer" min="0" value="0"
+                label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+            <param name="eeNeuAcMin" type="integer" min="0" value="0"
+                label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+            <param name="eeNeuAcMax" type="integer" min="0" value="0"
+                label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+            <param name="dNeuAcMin" type="integer" min="0" value="0"
+                label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+            <param name="dNeuAcMax" type="integer" min="0" value="0"
+                label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+            <param name="amNeuAcMin" type="integer" min="0" value="0"
+                label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+            <param name="amNeuAcMax" type="integer" min="0" value="0"
+                label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+            <param name="lNeuGcMin" type="integer" min="0" value="0"
+                label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+            <param name="lNeuGcMax" type="integer" min="0" value="0"
+                label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+            <param name="eeNeuGcMin" type="integer" min="0" value="0"
+                label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+            <param name="eeNeuGcMax" type="integer" min="0" value="0"
+                label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+            <param name="dNeuGcMin" type="integer" min="0" value="0"
+                label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+            <param name="dNeuGcMax" type="integer" min="0" value="0"
+                label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+            <param name="amNeuGcMin" type="integer" min="0" value="0"
+                label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+            <param name="amNeuGcMax" type="integer" min="0" value="0"
+                label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+        </section>
+        <section name="modifications" title="Chemical Modifications" expanded="false">
+            <param name="phosMin" type="integer" min="0" value="0" label="Minimum phosphate count" />
+            <param name="phosMax" type="integer" min="0" value="0" label="Maximum phosphate count" />
+            <param name="sulfMin" type="integer" min="0" value="0" label="Minimum sulfate count" />
+            <param name="sulfMax" type="integer" min="0" value="0" label="Maximum sulfate count" />
+            <param name="dHexNAcMin" type="integer" min="0" value="0"
+                label="Minimum N-acetyl deoxyhexose count" />
+            <param name="dHexNAcMax" type="integer" min="0" value="0"
+                label="Maximum N-acetyl deoxyhexose count" />
+            <param name="acetylMin" type="integer" min="0" value="0"
+                label="Minimum acetylation count" />
+            <param name="acetylMax" type="integer" min="0" value="0"
+                label="Maximum acetylation count" />
+        </section>
+        <section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
+            <param name="enable_custom_mono" type="boolean" truevalue="true" falsevalue="false"
+                checked="false" label="Enable custom monosaccharide settings" />
+            <section name="custom_mono1" title="Custom Monosaccharide 1" expanded="false">
+                <param name="enable_mono1" type="boolean" truevalue="true" falsevalue="false"
+                    checked="false" label="Enable custom monosaccharide 1" />
+                <param name="customMono1Name" type="text" value=""
+                    label="Name of first custom monosaccharide" />
+                <param name="customMono1CCount" type="integer" min="0" value="0"
+                    label="Carbon count" />
+                <param name="customMono1HCount" type="integer" min="0" value="0"
+                    label="Hydrogen count" />
+                <param name="customMono1NCount" type="integer" min="0" value="0"
+                    label="Nitrogen count" />
+                <param name="customMono1OCount" type="integer" min="0" value="0"
+                    label="Oxygen count" />
+                <param name="customMono1Mass" type="float" value="0.0" label="Mass" />
+                <param name="customMono1Min" type="integer" min="0" value="0" label="Minimum count" />
+                <param name="customMono1Max" type="integer" min="0" value="0" label="Maximum count" />
+            </section>
+            <section name="custom_mono2" title="Custom Monosaccharide 2" expanded="false">
+                <param name="enable_mono2" type="boolean" truevalue="true" falsevalue="false"
+                    checked="false" label="Enable custom monosaccharide 2" />
+                <param name="customMono2Name" type="text" value=""
+                    label="Name of second custom monosaccharide" />
+                <param name="customMono2CCount" type="integer" min="0" value="0"
+                    label="Carbon count" />
+                <param name="customMono2HCount" type="integer" min="0" value="0"
+                    label="Hydrogen count" />
+                <param name="customMono2NCount" type="integer" min="0" value="0"
+                    label="Nitrogen count" />
+                <param name="customMono2OCount" type="integer" min="0" value="0"
+                    label="Oxygen count" />
+                <param name="customMono2Mass" type="float" value="0.0" label="Mass" />
+                <param name="customMono2Min" type="integer" min="0" value="0" label="Minimum count" />
+                <param name="customMono2Max" type="integer" min="0" value="0" label="Maximum count" />
+            </section>
+            <section name="custom_mono3" title="Custom Monosaccharide 3" expanded="false">
+                <param name="enable_mono3" type="boolean" truevalue="true" falsevalue="false"
+                    checked="false" label="Enable custom monosaccharide 3" />
+                <param name="customMono3Name" type="text" value=""
+                    label="Name of third custom monosaccharide" />
+                <param name="customMono3CCount" type="integer" min="0" value="0"
+                    label="Carbon count" />
+                <param name="customMono3HCount" type="integer" min="0" value="0"
+                    label="Hydrogen count" />
+                <param name="customMono3NCount" type="integer" min="0" value="0"
+                    label="Nitrogen count" />
+                <param name="customMono3OCount" type="integer" min="0" value="0"
+                    label="Oxygen count" />
+                <param name="customMono3Mass" type="float" value="0.0" label="Mass" />
+                <param name="customMono3Min" type="integer" min="0" value="0" label="Minimum count" />
+                <param name="customMono3Max" type="integer" min="0" value="0" label="Maximum count" />
+            </section>
+            <section name="custom_mono4" title="Custom Monosaccharide 4" expanded="false">
+                <param name="enable_mono4" type="boolean" truevalue="true" falsevalue="false"
+                    checked="false" label="Enable custom monosaccharide 4" />
+                <param name="customMono4Name" type="text" value=""
+                    label="Name of fourth custom monosaccharide" />
+                <param name="customMono4CCount" type="integer" min="0" value="0"
+                    label="Carbon count" />
+                <param name="customMono4HCount" type="integer" min="0" value="0"
+                    label="Hydrogen count" />
+                <param name="customMono4NCount" type="integer" min="0" value="0"
+                    label="Nitrogen count" />
+                <param name="customMono4OCount" type="integer" min="0" value="0"
+                    label="Oxygen count" />
+                <param name="customMono4Mass" type="float" value="0.0" label="Mass" />
+                <param name="customMono4Min" type="integer" min="0" value="0" label="Minimum count" />
+                <param name="customMono4Max" type="integer" min="0" value="0" label="Maximum count" />
+            </section>
+            <section name="custom_mono5" title="Custom Monosaccharide 5" expanded="false">
+                <param name="enable_mono5" type="boolean" truevalue="true" falsevalue="false"
+                    checked="false" label="Enable custom monosaccharide 5" />
+                <param name="customMono5Name" type="text" value=""
+                    label="Name of fifth custom monosaccharide" />
+                <param name="customMono5CCount" type="integer" min="0" value="0"
+                    label="Carbon count" />
+                <param name="customMono5HCount" type="integer" min="0" value="0"
+                    label="Hydrogen count" />
+                <param name="customMono5NCount" type="integer" min="0" value="0"
+                    label="Nitrogen count" />
+                <param name="customMono5OCount" type="integer" min="0" value="0"
+                    label="Oxygen count" />
+                <param name="customMono5Mass" type="float" value="0.0" label="Mass" />
+                <param name="customMono5Min" type="integer" min="0" value="0" label="Minimum count" />
+                <param name="customMono5Max" type="integer" min="0" value="0" label="Maximum count" />
+            </section>
+        </section>
+        <section name="reducing_end_settings" title="Custom Reducing End Settings" expanded="false">
+            <param name="enable_custom_reducing" type="boolean" truevalue="true" falsevalue="false"
+                checked="false" label="Enable custom reducing end settings" />
+            <param name="customReducingMass" type="float" value="0.0"
+                label="Mass of custom reducing end" />
+            <param name="customReducingName" type="text" value=""
+                label="Name of custom reducing end" />
+            <param name="customReducedMassOutput" type="text" value=""
+                label="Output for reduced mass" />
+            <param name="customReducingCCount" type="text" value="" label="Carbon count" />
+            <param name="customReducingHCount" type="text" value="" label="Hydrogen count" />
+            <param name="customReducingNCount" type="text" value="" label="Nitrogen count" />
+            <param name="customReducingOCount" type="text" value="" label="Oxygen count" />
+        </section>
+        <section name="adduct_settings" title="Custom Adduct Settings" expanded="false">
+            <param name="enable_custom_adduct" type="boolean" truevalue="true" falsevalue="false"
+                checked="false" label="Enable custom adduct settings" />
+            <param name="customAdductPolarity" type="select" label="Polarity">
+                <option value="Positive">Positive</option>
+                <option value="Negative">Negative</option>
+            </param>
+            <param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct" />
+        </section>
+    </inputs>
+    <outputs>
+        <data name="output_csv" format="csv" label="${tool.name} on ${on_string}: Results in CSV" />
+        <data name="output_txt" format="txt" label="${tool.name} on ${on_string}: Parameters TXT" />
+    </outputs>
+    <tests>
+        <!--High Mannose - Hex and HexNAx-->
+        <test>
+            <param name="input" value="text_test.txt" />
+            <section name="general_settings">
+                <param name="derivatisation" value="native" />
+                <param name="reducedEnd" value="free" />
+                <param name="massError" value="0.6" />
+                <param name="massErrorType" value="Da" />
+                <param name="adducts" value="Neutral" />
+            </section>
+            <section name="hex_settings">
+                <param name="hexMin" value="0" />
+                <param name="hexMax" value="9" />
+                <param name="hexNAcMin" value="0" />
+                <param name="hexNAcMax" value="4" />
+            </section>
+            <output name="output_csv" file="example_output.csv" />
+        </test>
+    </tests>
+    <help>
 <![CDATA[ **What it does** GlyComboCLI is an open source software for combinatorial glycan composition determination to identify glycans in MS acquisitions of glycan-containing samples in text or mzML formats. This application enables rapid extraction of precursor m/z values from mzML files, a vendor-neutral format that ensures cross-platform compatibility. **Features** * Analyze mass spectrometry data of glycans and polysaccharides * Support for mzML and text file inputs * Extensive monosaccharide composition search capabilities * Customizable parameters for different types of glycans * Supports various derivatisation methods and reducing end formats * Ability to define custom monosaccharides and adducts **Input Parameters** The tool offers extensive control over the glycan composition search: * **Common Monosaccharides**: Hexose, N-acetyl hexosamine, deoxyhexose, and more * **Sialic Acids**: KDN, Neu5Ac, Neu5Gc, and modified variants * **Chemical Modifications**: Phosphate, sulfate, acetylation * **Custom Monosaccharides**: Define up to 5 custom monosaccharides * **Reducing End Settings**: Multiple pre-defined options or custom configurations * **Adduct Settings**: Various adduct types for positive and negative modes **Output** The tool produces a tabular output file listing potential glycan compositions that match the mass spectral data. ]]>
 </help>
-<citations>
-<citation type="bibtex"> article{doi:10.1021/jasms.4c00188, author = {Kelly, Maia I. and Ashwood, Christopher}, title = {GlyCombo Enables Rapid, Complete Glycan Composition Identification across Diverse Glycomic Sample Types}, journal = {Journal of the American Society for Mass Spectrometry}, volume = {35}, number = {10}, pages = {2324-2330}, year = {2024}, doi = {10.1021/jasms.4c00188}, note ={PMID: 39271475}, }</citation>
-</citations>
+    <citations>
+        <citation type="bibtex"> article{doi:10.1021/jasms.4c00188, author = {Kelly, Maia I. and
+            Ashwood, Christopher}, title = {GlyCombo Enables Rapid, Complete Glycan Composition
+            Identification across Diverse Glycomic Sample Types}, journal = {Journal of the American
+            Society for Mass Spectrometry}, volume = {35}, number = {10}, pages = {2324-2330}, year
+            = {2024}, doi = {10.1021/jasms.4c00188}, note ={PMID: 39271475}, }</citation>
+    </citations>
 </tool>
