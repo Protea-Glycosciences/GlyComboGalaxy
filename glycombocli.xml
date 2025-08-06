@@ -151,7 +151,7 @@
                 
         ## Custom monosaccharides
         #if $custom_mono_settings.enable_custom_mono:
-            #if $custom_mono_settings.custom_mono1.enable_mono1:
+            #if $custom_mono_settings.custom_mono1:
                 --customMono1Name '$custom_mono_settings.custom_mono1.customMono1Name'
                 --customMono1CCount '$custom_mono_settings.custom_mono1.customMono1CCount'
                 --customMono1HCount '$custom_mono_settings.custom_mono1.customMono1HCount'
@@ -162,7 +162,7 @@
                 --customMono1Max '$custom_mono_settings.custom_mono1.customMono1Max'
             #end if
             
-            #if $custom_mono_settings.custom_mono2.enable_mono2:
+            #if $custom_mono_settings.custom_mono2:
                 --customMono2Name '$custom_mono_settings.custom_mono2.customMono2Name'
                 --customMono2CCount '$custom_mono_settings.custom_mono2.customMono2CCount'
                 --customMono2HCount '$custom_mono_settings.custom_mono2.customMono2HCount'
@@ -173,7 +173,7 @@
                 --customMono2Max '$custom_mono_settings.custom_mono2.customMono2Max'
             #end if
             
-            #if $custom_mono_settings.custom_mono3.enable_mono3:
+            #if $custom_mono_settings.custom_mono3:
                 --customMono3Name '$custom_mono_settings.custom_mono3.customMono3Name'
                 --customMono3CCount '$custom_mono_settings.custom_mono3.customMono3CCount'
                 --customMono3HCount '$custom_mono_settings.custom_mono3.customMono3HCount'
@@ -184,7 +184,7 @@
                 --customMono3Max '$custom_mono_settings.custom_mono3.customMono3Max'
             #end if
             
-            #if $custom_mono_settings.custom_mono4.enable_mono4:
+            #if $custom_mono_settings.custom_mono4:
                 --customMono4Name '$custom_mono_settings.custom_mono4.customMono4Name'
                 --customMono4CCount '$custom_mono_settings.custom_mono4.customMono4CCount'
                 --customMono4HCount '$custom_mono_settings.custom_mono4.customMono4HCount'
@@ -195,7 +195,7 @@
                 --customMono4Max '$custom_mono_settings.custom_mono4.customMono4Max'
             #end if
             
-            #if $custom_mono_settings.custom_mono5.enable_mono5:
+            #if $custom_mono_settings.custom_mono5:
                 --customMono5Name '$custom_mono_settings.custom_mono5.customMono5Name'
                 --customMono5CCount '$custom_mono_settings.custom_mono5.customMono5CCount'
                 --customMono5HCount '$custom_mono_settings.custom_mono5.customMono5HCount'
@@ -345,116 +345,141 @@
                 label="Maximum acetylation count" />
         </section>
         <section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
-            <param name="enable_custom_mono" type="boolean" truevalue="true" falsevalue="false"
+            <conditional name="custom_mono_cond">
+                <param name="enable_custom_mono" type="boolean" truevalue="true" falsevalue="false"
                 checked="false" label="Enable custom monosaccharide settings" />
-            <section name="custom_mono1" title="Custom Monosaccharide 1" expanded="false">
-                <param name="enable_mono1" type="boolean" truevalue="true" falsevalue="false"
-                    checked="false" label="Enable custom monosaccharide 1" />
-                <param name="customMono1Name" type="text" value=""
-                    label="Name of first custom monosaccharide" />
-                <param name="customMono1CCount" type="integer" min="0" value="0"
-                    label="Carbon count" />
-                <param name="customMono1HCount" type="integer" min="0" value="0"
-                    label="Hydrogen count" />
-                <param name="customMono1NCount" type="integer" min="0" value="0"
-                    label="Nitrogen count" />
-                <param name="customMono1OCount" type="integer" min="0" value="0"
-                    label="Oxygen count" />
-                <param name="customMono1Mass" type="float" value="0.0" label="Mass" />
-                <param name="customMono1Min" type="integer" min="0" value="0" label="Minimum count" />
-                <param name="customMono1Max" type="integer" min="0" value="0" label="Maximum count" />
-            </section>
-            <section name="custom_mono2" title="Custom Monosaccharide 2" expanded="false">
-                <param name="enable_mono2" type="boolean" truevalue="true" falsevalue="false"
-                    checked="false" label="Enable custom monosaccharide 2" />
-                <param name="customMono2Name" type="text" value=""
-                    label="Name of second custom monosaccharide" />
-                <param name="customMono2CCount" type="integer" min="0" value="0"
-                    label="Carbon count" />
-                <param name="customMono2HCount" type="integer" min="0" value="0"
-                    label="Hydrogen count" />
-                <param name="customMono2NCount" type="integer" min="0" value="0"
-                    label="Nitrogen count" />
-                <param name="customMono2OCount" type="integer" min="0" value="0"
-                    label="Oxygen count" />
-                <param name="customMono2Mass" type="float" value="0.0" label="Mass" />
-                <param name="customMono2Min" type="integer" min="0" value="0" label="Minimum count" />
-                <param name="customMono2Max" type="integer" min="0" value="0" label="Maximum count" />
-            </section>
-            <section name="custom_mono3" title="Custom Monosaccharide 3" expanded="false">
-                <param name="enable_mono3" type="boolean" truevalue="true" falsevalue="false"
-                    checked="false" label="Enable custom monosaccharide 3" />
-                <param name="customMono3Name" type="text" value=""
-                    label="Name of third custom monosaccharide" />
-                <param name="customMono3CCount" type="integer" min="0" value="0"
-                    label="Carbon count" />
-                <param name="customMono3HCount" type="integer" min="0" value="0"
-                    label="Hydrogen count" />
-                <param name="customMono3NCount" type="integer" min="0" value="0"
-                    label="Nitrogen count" />
-                <param name="customMono3OCount" type="integer" min="0" value="0"
-                    label="Oxygen count" />
-                <param name="customMono3Mass" type="float" value="0.0" label="Mass" />
-                <param name="customMono3Min" type="integer" min="0" value="0" label="Minimum count" />
-                <param name="customMono3Max" type="integer" min="0" value="0" label="Maximum count" />
-            </section>
-            <section name="custom_mono4" title="Custom Monosaccharide 4" expanded="false">
-                <param name="enable_mono4" type="boolean" truevalue="true" falsevalue="false"
-                    checked="false" label="Enable custom monosaccharide 4" />
-                <param name="customMono4Name" type="text" value=""
-                    label="Name of fourth custom monosaccharide" />
-                <param name="customMono4CCount" type="integer" min="0" value="0"
-                    label="Carbon count" />
-                <param name="customMono4HCount" type="integer" min="0" value="0"
-                    label="Hydrogen count" />
-                <param name="customMono4NCount" type="integer" min="0" value="0"
-                    label="Nitrogen count" />
-                <param name="customMono4OCount" type="integer" min="0" value="0"
-                    label="Oxygen count" />
-                <param name="customMono4Mass" type="float" value="0.0" label="Mass" />
-                <param name="customMono4Min" type="integer" min="0" value="0" label="Minimum count" />
-                <param name="customMono4Max" type="integer" min="0" value="0" label="Maximum count" />
-            </section>
-            <section name="custom_mono5" title="Custom Monosaccharide 5" expanded="false">
-                <param name="enable_mono5" type="boolean" truevalue="true" falsevalue="false"
-                    checked="false" label="Enable custom monosaccharide 5" />
-                <param name="customMono5Name" type="text" value=""
-                    label="Name of fifth custom monosaccharide" />
-                <param name="customMono5CCount" type="integer" min="0" value="0"
-                    label="Carbon count" />
-                <param name="customMono5HCount" type="integer" min="0" value="0"
-                    label="Hydrogen count" />
-                <param name="customMono5NCount" type="integer" min="0" value="0"
-                    label="Nitrogen count" />
-                <param name="customMono5OCount" type="integer" min="0" value="0"
-                    label="Oxygen count" />
-                <param name="customMono5Mass" type="float" value="0.0" label="Mass" />
-                <param name="customMono5Min" type="integer" min="0" value="0" label="Minimum count" />
-                <param name="customMono5Max" type="integer" min="0" value="0" label="Maximum count" />
-            </section>
+                    <when value="true">
+                    <!-- Custom Monosaccharide 1-->
+                    <conditional name="custom_mono1_cond">
+                        <param name="custom_mono1" type="boolean"
+                            label="Custom Monosaccharide 1" />
+                        <when value="true">
+                            <param name="customMono1Name" type="text" value=""
+                                label="Name of first custom monosaccharide" />
+                            <param name="customMono1CCount" type="integer" min="0" value="0"
+                                label="Carbon count" />
+                            <param name="customMono1HCount" type="integer" min="0" value="0"
+                                label="Hydrogen count" />
+                            <param name="customMono1NCount" type="integer" min="0" value="0"
+                                label="Nitrogen count" />
+                            <param name="customMono1OCount" type="integer" min="0" value="0"
+                                label="Oxygen count" />
+                            <param name="customMono1Mass" type="float" value="0.0" label="Mass" />
+                            <param name="customMono1Min" type="integer" min="0" value="0" label="Minimum count" />
+                            <param name="customMono1Max" type="integer" min="0" value="0" label="Maximum count" />
+                        </when>
+                    </conditional>
+                    <!-- Custom Monosaccharide 2-->
+                    <conditional name="custom_mono2_cond">
+                        <param name="custom_mono2" type="boolean"
+                            label="Custom Monosaccharide 2" />
+                        <when value="true">
+                            <param name="customMono2Name" type="text" value=""
+                                label="Name of second custom monosaccharide" />
+                            <param name="customMono2CCount" type="integer" min="0" value="0"
+                                label="Carbon count" />
+                            <param name="customMono2HCount" type="integer" min="0" value="0"
+                                label="Hydrogen count" />
+                            <param name="customMono2NCount" type="integer" min="0" value="0"
+                                label="Nitrogen count" />
+                            <param name="customMono2OCount" type="integer" min="0" value="0"
+                                label="Oxygen count" />
+                            <param name="customMono2Mass" type="float" value="0.0" label="Mass" />
+                            <param name="customMono2Min" type="integer" min="0" value="0" label="Minimum count" />
+                            <param name="customMono2Max" type="integer" min="0" value="0" label="Maximum count" />
+                        </when>
+                    </conditional>
+                    <!-- Custom Monosaccharide 3-->
+                    <conditional name="custom_mono3_cond">
+                        <param name="custom_mono3" type="boolean"
+                            label="Custom Monosaccharide 3" />
+                        <when value="true">
+                            <param name="customMono3Name" type="text" value=""
+                                label="Name of third custom monosaccharide" />
+                            <param name="customMono3CCount" type="integer" min="0" value="0"
+                                label="Carbon count" />
+                            <param name="customMono3HCount" type="integer" min="0" value="0"
+                                label="Hydrogen count" />
+                            <param name="customMono3NCount" type="integer" min="0" value="0"
+                                label="Nitrogen count" />
+                            <param name="customMono3OCount" type="integer" min="0" value="0"
+                                label="Oxygen count" />
+                            <param name="customMono3Mass" type="float" value="0.0" label="Mass" />
+                            <param name="customMono3Min" type="integer" min="0" value="0" label="Minimum count" />
+                            <param name="customMono3Max" type="integer" min="0" value="0" label="Maximum count" />
+                        </when>
+                    </conditional>
+                    <!-- Custom Monosaccharide 4-->
+                    <conditional name="custom_mono4_cond">
+                        <param name="custom_mono4" type="boolean"
+                            label="Custom Monosaccharide 4" />
+                            <when value="true">
+                                <param name="customMono4Name" type="text" value=""
+                                    label="Name of fourth custom monosaccharide" />
+                                <param name="customMono4CCount" type="integer" min="0" value="0"
+                                    label="Carbon count" />
+                                <param name="customMono4HCount" type="integer" min="0" value="0"
+                                    label="Hydrogen count" />
+                                <param name="customMono4NCount" type="integer" min="0" value="0"
+                                    label="Nitrogen count" />
+                                <param name="customMono4OCount" type="integer" min="0" value="0"
+                                    label="Oxygen count" />
+                                <param name="customMono4Mass" type="float" value="0.0" label="Mass" />
+                                <param name="customMono4Min" type="integer" min="0" value="0" label="Minimum count" />
+                                <param name="customMono4Max" type="integer" min="0" value="0" label="Maximum count" />
+                            </when>
+                        </conditional>
+                    <!-- Custom Monosaccharide 5-->
+                    <conditional name="custom_mono5_cond">
+                        <param name="custom_mono5" type="boolean"
+                            label="Custom Monosaccharide 5" />
+                            <when value="true">
+                                <param name="customMono5Name" type="text" value=""
+                                    label="Name of fifth custom monosaccharide" />
+                                <param name="customMono5CCount" type="integer" min="0" value="0"
+                                    label="Carbon count" />
+                                <param name="customMono5HCount" type="integer" min="0" value="0"
+                                    label="Hydrogen count" />
+                                <param name="customMono5NCount" type="integer" min="0" value="0"
+                                    label="Nitrogen count" />
+                                <param name="customMono5OCount" type="integer" min="0" value="0"
+                                    label="Oxygen count" />
+                                <param name="customMono5Mass" type="float" value="0.0" label="Mass" />
+                                <param name="customMono5Min" type="integer" min="0" value="0" label="Minimum count" />
+                                <param name="customMono5Max" type="integer" min="0" value="0" label="Maximum count" />
+                            </when>
+                    </conditional>
+                </when>
+            </conditional>
         </section>
         <section name="reducing_end_settings" title="Custom Reducing End Settings" expanded="false">
-            <param name="enable_custom_reducing" type="boolean" truevalue="true" falsevalue="false"
-                checked="false" label="Enable custom reducing end settings" />
-            <param name="customReducingMass" type="float" value="0.0"
-                label="Mass of custom reducing end" />
-            <param name="customReducingName" type="text" value=""
-                label="Name of custom reducing end" />
-            <param name="customReducedMassOutput" type="text" value=""
-                label="Output for reduced mass" />
-            <param name="customReducingCCount" type="text" value="" label="Carbon count" />
-            <param name="customReducingHCount" type="text" value="" label="Hydrogen count" />
-            <param name="customReducingNCount" type="text" value="" label="Nitrogen count" />
-            <param name="customReducingOCount" type="text" value="" label="Oxygen count" />
+            <conditional name="reducing_end_cond">
+                <param name="enable_custom_reducing" type="boolean" label="Enable custom reducing end settings" />
+                <when value="true">
+                    <param name="customReducingMass" type="float" value="0.0"
+                        label="Mass of custom reducing end" />
+                    <param name="customReducingName" type="text" value=""
+                        label="Name of custom reducing end" />
+                    <param name="customReducedMassOutput" type="text" value=""
+                        label="Output for reduced mass" />
+                    <param name="customReducingCCount" type="text" value="" label="Carbon count" />
+                    <param name="customReducingHCount" type="text" value="" label="Hydrogen count" />
+                    <param name="customReducingNCount" type="text" value="" label="Nitrogen count" />
+                    <param name="customReducingOCount" type="text" value="" label="Oxygen count" />
+                </when>
+            </conditional>
         </section>
         <section name="adduct_settings" title="Custom Adduct Settings" expanded="false">
-            <param name="enable_custom_adduct" type="boolean" truevalue="true" falsevalue="false"
-                checked="false" label="Enable custom adduct settings" />
-            <param name="customAdductPolarity" type="select" label="Polarity">
-                <option value="Positive">Positive</option>
-                <option value="Negative">Negative</option>
-            </param>
-            <param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct" />
+            <conditional name="adduct_cond">
+                <param name="enable_custom_adduct" type="boolean" label="Enable custom adduct settings" />
+                <when value="true">
+                    <param name="customAdductPolarity" type="select" label="Polarity">
+                        <option value="Positive">Positive</option>
+                        <option value="Negative">Negative</option>
+                    </param>
+                    <param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct" />
+                </when>
+            </conditional>
         </section>
     </inputs>
     <outputs>
