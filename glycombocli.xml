@@ -228,7 +228,7 @@
         --derivatisation '$general_settings.derivatisation'
         --reducedEnd '$general_settings.reducedEnd'
         --adducts '$general_settings.adducts'
-        --massError "${massError}"
+        --massError "$general_settings.massError"
         --massErrorType '$general_settings.massErrorType'
         #if $general_settings.offByOne:
             --offByOne
