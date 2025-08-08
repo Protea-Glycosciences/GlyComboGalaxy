@@ -8,11 +8,11 @@
         <option value="free">Free</option>
         <option value="reduced">Reduced</option>
         <option value="instantPC">InstantPC</option>
-        <option value="rapifluor-MS">Rapifluor-MS</option>
-        <option value="2-aminobenzoic acid">2-aminobenzoic acid</option>
-        <option value="2-aminobenzamide">2-aminobenzamide</option>
+        <option value="rapifluor">Rapifluor-MS</option>
+        <option value="2aa">2-aminobenzoic acid</option>
+        <option value="2ab">2-aminobenzamide</option>
         <option value="procainamide">Procainamide</option>
-        <option value="girard's reagent P">Girard's reagent P</option>
+        <option value="girard">Girard's reagent P</option>
         <option value="custom">Custom</option>
     </xml>
     <xml name="adducts">
