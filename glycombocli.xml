@@ -1,10 +1,10 @@
-<tool id="GlyComboCLI" name="GlyComboCLI" version="0.1+galaxy.0" profile="20.01" license="Apache2.0">
+<tool id="glycombo" name="GlyCombo" version="0.1+galaxy.0" profile="20.01" license="Apache2.0">
     <macros>
         <import>macros.xml</import>
     </macros>
     <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
-        <container type="docker">proteaglycosciences/glycombocli:v1</container>
+        <container type="docker">proteaglycosciences/glycombocli:v2</container>
     </requirements>
     <command detect_errors="exit_code">
 <![CDATA[
@@ -259,7 +259,7 @@
             <param name="massErrorType" type="select" label="Mass error type">
                 <expand macro="mass_error" />
             </param>
-            <param name="offByOne" type="boolean" truevalue="true" falsevalue="false"
+            <param name="offByOne" type="boolean"
                 checked="false" label="Enable off-by-one searching"
                 help="For cases of incorrect monoisotopic precursor determination" />
         </section>
@@ -295,40 +295,44 @@
         </section>
         <section name="modified_sialic_acid_settings" title="Modified Sialic Acid Settings"
             expanded="false">
-            <param name="enable_modified_sialic" type="boolean" truevalue="true" falsevalue="false"
-                checked="false" label="Enable modified sialic acid settings" />
-            <param name="lNeuAcMin" type="integer" min="0" value="0"
-                label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
-            <param name="lNeuAcMax" type="integer" min="0" value="0"
-                label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count" />
-            <param name="eeNeuAcMin" type="integer" min="0" value="0"
-                label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
-            <param name="eeNeuAcMax" type="integer" min="0" value="0"
-                label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
-            <param name="dNeuAcMin" type="integer" min="0" value="0"
-                label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
-            <param name="dNeuAcMax" type="integer" min="0" value="0"
-                label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
-            <param name="amNeuAcMin" type="integer" min="0" value="0"
-                label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
-            <param name="amNeuAcMax" type="integer" min="0" value="0"
-                label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
-            <param name="lNeuGcMin" type="integer" min="0" value="0"
-                label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
-            <param name="lNeuGcMax" type="integer" min="0" value="0"
-                label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
-            <param name="eeNeuGcMin" type="integer" min="0" value="0"
-                label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
-            <param name="eeNeuGcMax" type="integer" min="0" value="0"
-                label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
-            <param name="dNeuGcMin" type="integer" min="0" value="0"
-                label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
-            <param name="dNeuGcMax" type="integer" min="0" value="0"
-                label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
-            <param name="amNeuGcMin" type="integer" min="0" value="0"
-                label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
-            <param name="amNeuGcMax" type="integer" min="0" value="0"
-                label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+            <conditional name="modified_sialic_acid">
+                <param name="enable_modified_sialic" type="boolean"
+                checked="false" label="Enable modified sialic acid setting" />
+                    <when value="true">
+                        <param name="lNeuAcMin" type="integer" min="0" value="0"
+                            label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+                        <param name="lNeuAcMax" type="integer" min="0" value="0"
+                            label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+                        <param name="eeNeuAcMin" type="integer" min="0" value="0"
+                            label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+                        <param name="eeNeuAcMax" type="integer" min="0" value="0"
+                            label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+                        <param name="dNeuAcMin" type="integer" min="0" value="0"
+                            label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+                        <param name="dNeuAcMax" type="integer" min="0" value="0"
+                            label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+                        <param name="amNeuAcMin" type="integer" min="0" value="0"
+                            label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+                        <param name="amNeuAcMax" type="integer" min="0" value="0"
+                            label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+                        <param name="lNeuGcMin" type="integer" min="0" value="0"
+                            label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+                        <param name="lNeuGcMax" type="integer" min="0" value="0"
+                            label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+                        <param name="eeNeuGcMin" type="integer" min="0" value="0"
+                            label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+                        <param name="eeNeuGcMax" type="integer" min="0" value="0"
+                            label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+                        <param name="dNeuGcMin" type="integer" min="0" value="0"
+                            label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+                        <param name="dNeuGcMax" type="integer" min="0" value="0"
+                            label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+                        <param name="amNeuGcMin" type="integer" min="0" value="0"
+                            label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+                        <param name="amNeuGcMax" type="integer" min="0" value="0"
+                            label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+                    </when>
+            </conditional>
         </section>
         <section name="modifications" title="Chemical Modifications" expanded="false">
             <param name="phosMin" type="integer" min="0" value="0" label="Minimum phosphate count" />
@@ -346,7 +350,7 @@
         </section>
         <section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
             <conditional name="custom_mono_cond">
-                <param name="enable_custom_mono" type="boolean" truevalue="true" falsevalue="false"
+                <param name="enable_custom_mono" type="boolean"
                 checked="false" label="Enable custom monosaccharide settings" />
                     <when value="true">
                     <!-- Custom Monosaccharide 1-->
@@ -487,7 +491,7 @@
         <data name="output_txt" format="txt" label="${tool.name} on ${on_string}: Parameters TXT" />
     </outputs>
     <tests>
-        <!--High Mannose - Hex and HexNAx-->
+        <!--Free High Mannose - Hex and HexNAx-->
         <test>
             <param name="input" value="text_test.txt" />
             <section name="general_settings">
@@ -505,9 +509,76 @@
             </section>
             <output name="output_csv" file="example_output.csv" />
         </test>
+        <!--Reduced -->
+        <test>
+            <param name="input" value="glycan_dummy_data.txt" />
+            <section name="general_settings">
+                <param name="derivatisation" value="native" />
+                <param name="reducedEnd" value="reduced" />
+                <param name="massError" value="0.6" />
+                <param name="massErrorType" value="Da" />
+                <param name="adducts" value="Neutral" />
+            </section>
+            <section name="hex_settings">
+                <param name="hexMin" value="0" />
+                <param name="hexMax" value="4" />
+                <param name="hexNAcMin" value="0" />
+                <param name="hexNAcMax" value="4" />
+                <param name="dhexMin" value="0" />
+                <param name="dhexMax" value="4" />
+                <param name="neu5AcMin" value="0" />
+                <param name="neu5AcMax" value="4" />
+                <param name="pentMin" value="0" />
+                <param name="pentMax" value="4" />
+                <param name="kdnMin" value="0" />
+                <param name="kdnMax" value="4" />
+            </section>
+            <output name="output_csv" file="dummy_re_output.csv">
+                <assert_contents>
+                    <has_text text="(Hex)4 (HexNAc)3 (Pent)3" />
+                    <has_text text="(Hex)1 (HexNAc)2" />
+                    <has_text text="(Hex)2 (HexNAc)2 (KDN)1" />
+                    <has_text text="(Hex)2 (HexNAc)1" />
+                    <has_text text="(Hex)1 (HexNAc)1" />
+                </assert_contents>
+            </output>
+        </test>
     </tests>
     <help>
-<![CDATA[ **What it does** GlyComboCLI is an open source software for combinatorial glycan composition determination to identify glycans in MS acquisitions of glycan-containing samples in text or mzML formats. This application enables rapid extraction of precursor m/z values from mzML files, a vendor-neutral format that ensures cross-platform compatibility. **Features** * Analyze mass spectrometry data of glycans and polysaccharides * Support for mzML and text file inputs * Extensive monosaccharide composition search capabilities * Customizable parameters for different types of glycans * Supports various derivatisation methods and reducing end formats * Ability to define custom monosaccharides and adducts **Input Parameters** The tool offers extensive control over the glycan composition search: * **Common Monosaccharides**: Hexose, N-acetyl hexosamine, deoxyhexose, and more * **Sialic Acids**: KDN, Neu5Ac, Neu5Gc, and modified variants * **Chemical Modifications**: Phosphate, sulfate, acetylation * **Custom Monosaccharides**: Define up to 5 custom monosaccharides * **Reducing End Settings**: Multiple pre-defined options or custom configurations * **Adduct Settings**: Various adduct types for positive and negative modes **Output** The tool produces a tabular output file listing potential glycan compositions that match the mass spectral data. ]]>
+<![CDATA[ **What it does** GlyComboCLI is an open source software for combinatorial glycan composition determination to identify glycans in MS acquisitions of glycan-containing samples in text or mzML formats. This application enables rapid extraction of precursor m/z values from mzML files, a vendor-neutral format that ensures cross-platform compatibility.
+
+**Features** 
+
+- Analyze mass spectrometry data of glycans and polysaccharides
+
+- Support for mzML and text file inputs
+
+- Extensive monosaccharide composition search capabilities
+
+- Customizable parameters for different types of glycans
+
+- Supports various derivatisation methods and reducing end formats
+
+- Ability to define custom monosaccharides and adducts
+
+
+**Input Parameters** The tool offers extensive control over the glycan composition search: 
+
+**Common Monosaccharides**: Hexose, N-acetyl hexosamine, deoxyhexose, and more 
+
+**Sialic Acids**: KDN, Neu5Ac, Neu5Gc, and modified variants
+
+**Chemical Modifications**: Phosphate, sulfate, acetylation 
+
+**Custom Monosaccharides**: Define up to 5 custom monosaccharides 
+
+**Reducing End Settings**: Multiple pre-defined options or custom configurations 
+
+**Adduct Settings**: Various adduct types for positive and negative modes 
+
+**Output** The tool produces a tabular output file listing potential glycan compositions that match the mass spectral data. 
+
+]]>
 </help>
     <citations>
         <citation type="bibtex"> article{doi:10.1021/jasms.4c00188, author = {Kelly, Maia I. and
