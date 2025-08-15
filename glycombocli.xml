@@ -296,8 +296,7 @@
         <section name="modified_sialic_acid_settings" title="Modified Sialic Acid Settings"
             expanded="false">
             <conditional name="modified_sialic_acid">
-                <param name="enable_modified_sialic" type="boolean"
-                checked="false" label="Enable modified sialic acid setting" />
+                <param name="enable_modified_sialic" type="boolean" checked="false" label="Enable modified sialic acid setting" />
                     <when value="true">
                         <param name="lNeuAcMin" type="integer" min="0" value="0"
                             label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
@@ -350,8 +349,7 @@
         </section>
         <section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
             <conditional name="custom_mono_cond">
-                <param name="enable_custom_mono" type="boolean"
-                checked="false" label="Enable custom monosaccharide settings" />
+                <param name="enable_custom_mono" type="boolean" checked="false" label="Enable custom monosaccharide settings" />
                     <when value="true">
                     <!-- Custom Monosaccharide 1-->
                     <conditional name="custom_mono1_cond">
@@ -498,7 +496,7 @@
                 <param name="derivatisation" value="native" />
                 <param name="reducedEnd" value="free" />
                 <param name="massError" value="0.6" />
-                <param name="massErrorType" value="Da" />
+                <param name="massErrorType" value="da" />
                 <param name="adducts" value="Neutral" />
             </section>
             <section name="hex_settings">
