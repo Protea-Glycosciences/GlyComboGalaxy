@@ -4,7 +4,7 @@
     </macros>
     <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
-        <container type="docker">proteaglycosciences/glycombocli:v2</container>
+        <container type="docker">proteaglycosciences/glycombocli:v1</container>
     </requirements>
     <command detect_errors="exit_code">
 <![CDATA[
@@ -239,7 +239,7 @@
 
 ]]>
 </command>
-    <inputs>
+<inputs>
         <param format="mzml,txt" name="input" type="data" label="Input mass spectrometry data"
             help="Accepts mzML files or text files containing mass lists" />
         <section name="general_settings" title="General Analysis Settings" expanded="true">
@@ -295,43 +295,41 @@
         </section>
         <section name="modified_sialic_acid_settings" title="Modified Sialic Acid Settings"
             expanded="false">
-            <conditional name="modified_sialic_acid">
-                <param name="enable_modified_sialic" type="boolean" checked="false" label="Enable modified sialic acid setting" />
-                    <when value="true">
-                        <param name="lNeuAcMin" type="integer" min="0" value="0"
-                            label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
-                        <param name="lNeuAcMax" type="integer" min="0" value="0"
-                            label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count" />
-                        <param name="eeNeuAcMin" type="integer" min="0" value="0"
-                            label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
-                        <param name="eeNeuAcMax" type="integer" min="0" value="0"
-                            label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
-                        <param name="dNeuAcMin" type="integer" min="0" value="0"
-                            label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
-                        <param name="dNeuAcMax" type="integer" min="0" value="0"
-                            label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
-                        <param name="amNeuAcMin" type="integer" min="0" value="0"
-                            label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
-                        <param name="amNeuAcMax" type="integer" min="0" value="0"
-                            label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
-                        <param name="lNeuGcMin" type="integer" min="0" value="0"
-                            label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
-                        <param name="lNeuGcMax" type="integer" min="0" value="0"
-                            label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
-                        <param name="eeNeuGcMin" type="integer" min="0" value="0"
-                            label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
-                        <param name="eeNeuGcMax" type="integer" min="0" value="0"
-                            label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
-                        <param name="dNeuGcMin" type="integer" min="0" value="0"
-                            label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
-                        <param name="dNeuGcMax" type="integer" min="0" value="0"
-                            label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
-                        <param name="amNeuGcMin" type="integer" min="0" value="0"
-                            label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
-                        <param name="amNeuGcMax" type="integer" min="0" value="0"
-                            label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
-                    </when>
-            </conditional>
+                <param name="enable_modified_sialic" type="boolean" truevalue="true" falsevalue="false" checked="false"
+                    label="Enable modified sialic acid setting" />
+
+                    <param name="lNeuAcMin" type="integer" min="0" value="0"
+                        label="Minimum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+                    <param name="lNeuAcMax" type="integer" min="0" value="0"
+                        label="Maximum lactonised N-acetyl-neuraminic acid (a2,3) count" />
+                    <param name="eeNeuAcMin" type="integer" min="0" value="0"
+                        label="Minimum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+                    <param name="eeNeuAcMax" type="integer" min="0" value="0"
+                        label="Maximum ethyl esterified N-acetyl-neuraminic acid (a2,6) count" />
+                    <param name="dNeuAcMin" type="integer" min="0" value="0"
+                        label="Minimum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+                    <param name="dNeuAcMax" type="integer" min="0" value="0"
+                        label="Maximum dimethylamidated N-acetyl-neuraminic acid (a2,6) count" />
+                    <param name="amNeuAcMin" type="integer" min="0" value="0"
+                        label="Minimum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+                    <param name="amNeuAcMax" type="integer" min="0" value="0"
+                        label="Maximum ammonia amidated N-acetyl-neuraminic acid (a2,3) count" />
+                    <param name="lNeuGcMin" type="integer" min="0" value="0"
+                        label="Minimum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+                    <param name="lNeuGcMax" type="integer" min="0" value="0"
+                        label="Maximum lactonised N-glycolyl-neuraminic acid (a2,3) count" />
+                    <param name="eeNeuGcMin" type="integer" min="0" value="0"
+                        label="Minimum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+                    <param name="eeNeuGcMax" type="integer" min="0" value="0"
+                        label="Maximum ethyl esterified N-glycolyl-neuraminic acid (a2,6) count" />
+                    <param name="dNeuGcMin" type="integer" min="0" value="0"
+                        label="Minimum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+                    <param name="dNeuGcMax" type="integer" min="0" value="0"
+                        label="Maximum dimethylamidated N-glycolyl-neuraminic acid (a2,6) count" />
+                    <param name="amNeuGcMin" type="integer" min="0" value="0"
+                        label="Minimum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
+                    <param name="amNeuGcMax" type="integer" min="0" value="0"
+                        label="Maximum ammonia amidated N-glycolyl-neuraminic acid (a2,3) count" />
         </section>
         <section name="modifications" title="Chemical Modifications" expanded="false">
             <param name="phosMin" type="integer" min="0" value="0" label="Minimum phosphate count" />
@@ -348,14 +346,10 @@
                 label="Maximum acetylation count" />
         </section>
         <section name="custom_mono_settings" title="Custom Monosaccharides" expanded="false">
-            <conditional name="custom_mono_cond">
                 <param name="enable_custom_mono" type="boolean" checked="false" label="Enable custom monosaccharide settings" />
-                    <when value="true">
                     <!-- Custom Monosaccharide 1-->
-                    <conditional name="custom_mono1_cond">
                         <param name="custom_mono1" type="boolean"
                             label="Custom Monosaccharide 1" />
-                        <when value="true">
                             <param name="customMono1Name" type="text" value=""
                                 label="Name of first custom monosaccharide" />
                             <param name="customMono1CCount" type="integer" min="0" value="0"
@@ -369,13 +363,9 @@
                             <param name="customMono1Mass" type="float" value="0.0" label="Mass" />
                             <param name="customMono1Min" type="integer" min="0" value="0" label="Minimum count" />
                             <param name="customMono1Max" type="integer" min="0" value="0" label="Maximum count" />
-                        </when>
-                    </conditional>
                     <!-- Custom Monosaccharide 2-->
-                    <conditional name="custom_mono2_cond">
                         <param name="custom_mono2" type="boolean"
                             label="Custom Monosaccharide 2" />
-                        <when value="true">
                             <param name="customMono2Name" type="text" value=""
                                 label="Name of second custom monosaccharide" />
                             <param name="customMono2CCount" type="integer" min="0" value="0"
@@ -389,13 +379,9 @@
                             <param name="customMono2Mass" type="float" value="0.0" label="Mass" />
                             <param name="customMono2Min" type="integer" min="0" value="0" label="Minimum count" />
                             <param name="customMono2Max" type="integer" min="0" value="0" label="Maximum count" />
-                        </when>
-                    </conditional>
                     <!-- Custom Monosaccharide 3-->
-                    <conditional name="custom_mono3_cond">
                         <param name="custom_mono3" type="boolean"
                             label="Custom Monosaccharide 3" />
-                        <when value="true">
                             <param name="customMono3Name" type="text" value=""
                                 label="Name of third custom monosaccharide" />
                             <param name="customMono3CCount" type="integer" min="0" value="0"
@@ -409,13 +395,9 @@
                             <param name="customMono3Mass" type="float" value="0.0" label="Mass" />
                             <param name="customMono3Min" type="integer" min="0" value="0" label="Minimum count" />
                             <param name="customMono3Max" type="integer" min="0" value="0" label="Maximum count" />
-                        </when>
-                    </conditional>
                     <!-- Custom Monosaccharide 4-->
-                    <conditional name="custom_mono4_cond">
                         <param name="custom_mono4" type="boolean"
                             label="Custom Monosaccharide 4" />
-                            <when value="true">
                                 <param name="customMono4Name" type="text" value=""
                                     label="Name of fourth custom monosaccharide" />
                                 <param name="customMono4CCount" type="integer" min="0" value="0"
@@ -429,13 +411,9 @@
                                 <param name="customMono4Mass" type="float" value="0.0" label="Mass" />
                                 <param name="customMono4Min" type="integer" min="0" value="0" label="Minimum count" />
                                 <param name="customMono4Max" type="integer" min="0" value="0" label="Maximum count" />
-                            </when>
-                        </conditional>
                     <!-- Custom Monosaccharide 5-->
-                    <conditional name="custom_mono5_cond">
                         <param name="custom_mono5" type="boolean"
                             label="Custom Monosaccharide 5" />
-                            <when value="true">
                                 <param name="customMono5Name" type="text" value=""
                                     label="Name of fifth custom monosaccharide" />
                                 <param name="customMono5CCount" type="integer" min="0" value="0"
@@ -449,15 +427,9 @@
                                 <param name="customMono5Mass" type="float" value="0.0" label="Mass" />
                                 <param name="customMono5Min" type="integer" min="0" value="0" label="Minimum count" />
                                 <param name="customMono5Max" type="integer" min="0" value="0" label="Maximum count" />
-                            </when>
-                    </conditional>
-                </when>
-            </conditional>
         </section>
         <section name="reducing_end_settings" title="Custom Reducing End Settings" expanded="false">
-            <conditional name="reducing_end_cond">
                 <param name="enable_custom_reducing" type="boolean" label="Enable custom reducing end settings" />
-                <when value="true">
                     <param name="customReducingMass" type="float" value="0.0"
                         label="Mass of custom reducing end" />
                     <param name="customReducingName" type="text" value=""
@@ -468,20 +440,14 @@
                     <param name="customReducingHCount" type="text" value="" label="Hydrogen count" />
                     <param name="customReducingNCount" type="text" value="" label="Nitrogen count" />
                     <param name="customReducingOCount" type="text" value="" label="Oxygen count" />
-                </when>
-            </conditional>
         </section>
         <section name="adduct_settings" title="Custom Adduct Settings" expanded="false">
-            <conditional name="adduct_cond">
                 <param name="enable_custom_adduct" type="boolean" label="Enable custom adduct settings" />
-                <when value="true">
                     <param name="customAdductPolarity" type="select" label="Polarity">
                         <option value="Positive">Positive</option>
                         <option value="Negative">Negative</option>
                     </param>
                     <param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct" />
-                </when>
-            </conditional>
         </section>
     </inputs>
     <outputs>
@@ -496,7 +462,7 @@
                 <param name="derivatisation" value="native" />
                 <param name="reducedEnd" value="free" />
                 <param name="massError" value="0.6" />
-                <param name="massErrorType" value="da" />
+                <param name="massErrorType" value="Da" />
                 <param name="adducts" value="Neutral" />
             </section>
             <section name="hex_settings">
@@ -512,7 +478,7 @@
             <param name="input" value="glycan_dummy_data.txt" />
             <section name="general_settings">
                 <param name="derivatisation" value="native" />
-                <param name="reducedEnd" value="reduced" />
+                <param name="reducedEnd" value="free" />
                 <param name="massError" value="0.6" />
                 <param name="massErrorType" value="Da" />
                 <param name="adducts" value="Neutral" />
@@ -522,22 +488,24 @@
                 <param name="hexMax" value="4" />
                 <param name="hexNAcMin" value="0" />
                 <param name="hexNAcMax" value="4" />
-                <param name="dhexMin" value="0" />
-                <param name="dhexMax" value="4" />
-                <param name="neu5AcMin" value="0" />
-                <param name="neu5AcMax" value="4" />
+                <param name="dHexMin" value="0" />
+                <param name="dHexMax" value="4" />
                 <param name="pentMin" value="0" />
                 <param name="pentMax" value="4" />
+            </section>
+            <section name="sialic_acid_settings">
+                <param name="neu5AcMin" value="0" />
+                <param name="neu5AcMax" value="4" />
                 <param name="kdnMin" value="0" />
                 <param name="kdnMax" value="4" />
             </section>
             <output name="output_csv" file="dummy_re_output.csv">
                 <assert_contents>
-                    <has_text text="(Hex)4 (HexNAc)3 (Pent)3" />
                     <has_text text="(Hex)1 (HexNAc)2" />
-                    <has_text text="(Hex)2 (HexNAc)2 (KDN)1" />
-                    <has_text text="(Hex)2 (HexNAc)1" />
-                    <has_text text="(Hex)1 (HexNAc)1" />
+                    <has_text text="(Hex)4 (NeuAc)3 (HexNAc)4" />
+                    <has_text text="(dHex)1 (Pent)1 (Hex)2 (HexNAc)3" />
+                    <has_text text="(Pent)1 (Hex)3 (HexNAc)2" />
+                    <has_text text="(dHex)1 (KDN)3" />
                 </assert_contents>
             </output>
         </test>
