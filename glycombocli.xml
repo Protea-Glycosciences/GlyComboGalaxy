@@ -473,7 +473,7 @@
             </section>
             <output name="output_csv" file="example_output.csv" />
         </test>
-        <!--Reduced -->
+        <!--Free Native Neutral-->
         <test>
             <param name="input" value="glycan_dummy_data.txt" />
             <section name="general_settings">
