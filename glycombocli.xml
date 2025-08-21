@@ -4,11 +4,11 @@
     </macros>
     <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
-        <container type="docker">proteaglycosciences/glycombocli:v1</container>
+        <container type="docker">proteaglycosciences/glycombocli:v4</container>
     </requirements>
     <command detect_errors="exit_code">
 <![CDATA[
-
+mkdir output_dir &&
 /app/GlyComboCLI 
 
 -F='$input' 
@@ -235,7 +235,7 @@
         #end if
 
 
---galaxyPath1 $output_csv --galaxyPath2 $output_txt
+--outputPath output_dir
 
 ]]>
 </command>
@@ -450,10 +450,13 @@
                     <param name="customAdductMass" type="float" value="0.0" label="Mass of custom adduct" />
         </section>
     </inputs>
-    <outputs>
-        <data name="output_csv" format="csv" label="${tool.name} on ${on_string}: Results in CSV" />
-        <data name="output_txt" format="txt" label="${tool.name} on ${on_string}: Parameters TXT" />
-    </outputs>
+	<outputs>
+	   <collection name="output1" type="list" label="${tool.name} on ${on_string}: Results " >
+	    <discover_datasets pattern="(?P&lt;designation&gt;.+)\.csv$" directory="output_dir" format="csv" visible="false"/>
+	    <discover_datasets pattern="(?P&lt;designation&gt;.+)\.txt$" directory="output_dir" format="txt" visible="false"/>
+	   </collection>
+	 </outputs>
+
     <tests>
         <!--Free High Mannose - Hex and HexNAx-->
         <test>
@@ -471,9 +474,9 @@
                 <param name="hexNAcMin" value="0" />
                 <param name="hexNAcMax" value="4" />
             </section>
-            <output name="output_csv" file="example_output.csv" />
+            <output name="result" file="result.csv" />
         </test>
-        <!--Free Native Neutral-->
+        <!--Reduced -->
         <test>
             <param name="input" value="glycan_dummy_data.txt" />
             <section name="general_settings">
