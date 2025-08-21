@@ -501,7 +501,7 @@ mkdir output_dir &&
                 <param name="kdnMin" value="0" />
                 <param name="kdnMax" value="4" />
             </section>
-            <output name="output_csv" file="dummy_re_output.csv">
+            <output name="output_csv" file="dummy_output.csv">
                 <assert_contents>
                     <has_text text="(Hex)1 (HexNAc)2" />
                     <has_text text="(Hex)4 (NeuAc)3 (HexNAc)4" />
@@ -511,6 +511,195 @@ mkdir output_dir &&
                 </assert_contents>
             </output>
         </test>
+	<!-- InstantPC -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="instantpc" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+
+	  <section name="hex_settings">
+	    <param name="hexMax" value="3" />
+	  </section>
+
+	  <section name="modified_sialic_acid_settings">
+	    <param name="enable_modified_sialic" value="true" />
+	    <param name="lNeuAcMax" value="2" />
+	    <param name="dNeuAcMax" value="2" />
+	    <param name="eeNeuAcMax" value="3" />
+	  </section>
+
+	  <output name="output_csv">
+	    <assert_contents>
+	      <has_text text="(Hex)3 (lNeuAc)1 (dNeuAc)1" />
+	      <has_text text="(eNeuAc)1" />
+	      <has_text text="(Hex)1 (lNeuAc)2" />
+	      <has_text text="(lNeuAc)1 (eNeuAc)3 (dNeuAc)1" />
+	      <has_text text="(Hex)2 (dNeuAc)2" />
+	    </assert_contents>
+	  </output>
+	</test>
+	<!-- Rapifluor -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="rapifluor" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+
+	  <section name="hex_settings">
+	    <param name="hexMax" value="3" />
+	  </section>
+
+	  <section name="modified_sialic_acid_settings">
+	    <param name="enable_modified_sialic" value="true" />
+	    <param name="amNeuAcMax" value="3" />
+	    <param name="lNeuGcMax" value="2" />
+	    <param name="eeNeuGcMax" value="3" />
+	    <param name="dNeuGcMax" value="2" />
+	  </section>
+
+	  <output name="output_csv">
+	    <assert_contents>
+	      <has_text text="(Hex)2 (amNeuAc)2 (eNeuGc)3" />
+	      <has_text text="(lNeuGc)2 (eNeuGc)3" />
+	      <has_text text="(Hex)3 (lNeuGc)1 (dNeuGc)2" />
+	      <has_text text="(amNeuAc)1 (lNeuGc)2 (dNeuGc)1" />
+	      <has_text text="(Hex)1 (amNeuAc)3 (eNeuGc)1 (dNeuGc)1" />
+	    </assert_contents>
+	  </output>
+	</test>
+	<!-- 2aa -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="2aa" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+	  <section name="hex_settings">
+	    <param name="hexMin" value="1" />
+	    <param name="hexMax" value="3" />
+	  </section>
+	  <section name="modified_sialic_acid_settings">
+	    <param name="enable_modified_sialic" value="true" />
+	    <param name="amNeuGcMin" value="0" />
+	    <param name="amNeuGcMax" value="2" />
+	  </section>
+	  <section name="modifications">
+	    <param name="phosMin" value="0" />
+	    <param name="phosMax" value="3" />
+	  </section>
+	  <output name="output_csv" file="dummy_output.csv">
+	    <assert_contents>
+	      <has_text text="(Hex)1 (amNeuGc)1" />
+	      <has_text text="(Hex)2 (Phos)1" />
+	      <has_text text="(Hex)3 (Phos)1 (amNeuGc)2" />
+	      <has_text text="(Hex)2 (Phos)3" />
+	    </assert_contents>
+	  </output>
+	</test>
+
+	<!-- 2ab -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="2ab" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+	  <section name="hex_settings">
+	    <param name="hexMin" value="1" />
+	    <param name="hexMax" value="3" />
+	  </section>
+	  <section name="modifications">
+	    <param name="sulfMin" value="0" />
+	    <param name="sulfMax" value="2" />
+	    <param name="dHexNAcMin" value="0" />
+	    <param name="dHexNAcMax" value="3" />
+	  </section>
+	  <output name="output_csv" file="dummy_output.csv">
+	    <assert_contents>
+	      <has_text text="(Hex)1 (Sulf)1" />
+	      <has_text text="(Hex)2 (dHexNAc)3" />
+	      <has_text text="(Hex)3 (Sulf)2" />
+	      <has_text text="(Hex)2 (dHexNAc)2" />
+	    </assert_contents>
+	  </output>
+	</test>
+
+	<!-- Procainamide -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="procainamide" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+	  <section name="hex_settings">
+	    <param name="hexMin" value="0" />
+	    <param name="hexMax" value="4" />
+	    <param name="hexNAcMin" value="0" />
+	    <param name="hexNAcMax" value="3" />
+	  </section>
+	  <section name="sialic_acid_settings">
+	    <param name="neu5GcMin" value="0" />
+	    <param name="neu5GcMax" value="3" />
+	  </section>
+	  <output name="output_csv" file="dummy_output.csv">
+	    <assert_contents>
+	      <has_text text="(Hex)2 (NeuGc)1" />
+	      <has_text text="(HexNAc)3" />
+	      <has_text text="(Hex)1 (NeuGc)3 (HexNAc)2" />
+	      <has_text text="(HexNAc)2" />
+	      <has_text text="(Hex)4 (NeuGc)3" />
+	    </assert_contents>
+	  </output>
+	</test>
+
+	<!-- GirP -->
+	<test>
+	  <param name="input" value="glycan_dummy_data.txt" />
+	  <section name="general_settings">
+	    <param name="derivatisation" value="native" />
+	    <param name="reducedEnd" value="girard" />
+	    <param name="massError" value="0.6" />
+	    <param name="massErrorType" value="Da" />
+	    <param name="adducts" value="Neutral" />
+	  </section>
+	  <section name="hex_settings">
+	    <param name="hexMin" value="0" />
+	    <param name="hexMax" value="4" />
+	    <param name="hexNAcMin" value="0" />
+	    <param name="hexNAcMax" value="3" />
+	  </section>
+	  <section name="sialic_acid_settings">
+	    <param name="neu5AcMin" value="0" />
+	    <param name="neu5AcMax" value="1" />
+	  </section>
+	  <output name="output_csv" file="dummy_output.csv">
+	    <assert_contents>
+	      <has_text text="(Hex)3 (NeuAc)1 (HexNAc)1" />
+	      <has_text text="(HexNAc)3" />
+	      <has_text text="(Hex)4" />
+	      <has_text text="(HexNAc)1" />
+	      <has_text text="(Hex)1 (NeuAc)1" />
+	    </assert_contents>
+	  </output>
+	</test>
     </tests>
     <help>
 <![CDATA[ **What it does** GlyComboCLI is an open source software for combinatorial glycan composition determination to identify glycans in MS acquisitions of glycan-containing samples in text or mzML formats. This application enables rapid extraction of precursor m/z values from mzML files, a vendor-neutral format that ensures cross-platform compatibility.

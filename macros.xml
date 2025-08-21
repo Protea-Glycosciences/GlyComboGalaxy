@@ -7,7 +7,7 @@
     <xml name="reducing_ends">
         <option value="free">Free</option>
         <option value="reduced">Reduced</option>
-        <option value="instantPC">InstantPC</option>
+        <option value="instantpc">InstantPC</option>
         <option value="rapifluor">Rapifluor-MS</option>
         <option value="2aa">2-aminobenzoic acid</option>
         <option value="2ab">2-aminobenzamide</option>
