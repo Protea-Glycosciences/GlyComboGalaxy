@@ -457,7 +457,8 @@ mkdir output_dir &&
 	</outputs>
 
     <tests>
-        <!--Free High Mannose - Hex and HexNAx-->
+        <!-- Tests 1 - 8 cover all monosaccharides, modifications, reducing ends, and adducts.-->
+        <!--Free & MH- -->
         <test>
             <param name="input" value="text_test.txt" />
             <section name="general_settings">
@@ -465,7 +466,7 @@ mkdir output_dir &&
                 <param name="reducedEnd" value="free" />
                 <param name="massError" value="0.6" />
                 <param name="massErrorType" value="Da" />
-                <param name="adducts" value="Neutral" />
+                <param name="adducts" value="MH-" />
             </section>
             <section name="hex_settings">
                 <param name="hexMin" value="0" />
@@ -475,43 +476,45 @@ mkdir output_dir &&
             </section>
             <output name="output_csv" file="output_dir/result.csv" />
         </test>
-        <!--Reduced -->
+        <!--Reduced & MTFA+ -->
         <test>
-            <param name="input" value="glycan_dummy_data.txt" />
-            <section name="general_settings">
-                <param name="derivatisation" value="native" />
-                <param name="reducedEnd" value="free" />
-                <param name="massError" value="0.6" />
-                <param name="massErrorType" value="Da" />
-                <param name="adducts" value="Neutral" />
-            </section>
-            <section name="hex_settings">
-                <param name="hexMin" value="0" />
-                <param name="hexMax" value="4" />
-                <param name="hexNAcMin" value="0" />
-                <param name="hexNAcMax" value="4" />
-                <param name="dHexMin" value="0" />
-                <param name="dHexMax" value="4" />
-                <param name="pentMin" value="0" />
-                <param name="pentMax" value="4" />
-            </section>
-            <section name="sialic_acid_settings">
-                <param name="neu5AcMin" value="0" />
-                <param name="neu5AcMax" value="4" />
-                <param name="kdnMin" value="0" />
-                <param name="kdnMax" value="4" />
-            </section>
-            <output name="output_csv" file="dummy_output.csv">
-                <assert_contents>
-                    <has_text text="(Hex)1 (HexNAc)2" />
-                    <has_text text="(Hex)4 (NeuAc)3 (HexNAc)4" />
-                    <has_text text="(dHex)1 (Pent)1 (Hex)2 (HexNAc)3" />
-                    <has_text text="(Pent)1 (Hex)3 (HexNAc)2" />
-                    <has_text text="(dHex)1 (KDN)3" />
-                </assert_contents>
-            </output>
+        <param name="input" value="glycan_dummy_data.txt" />
+        <section name="general_settings">
+            <param name="derivatisation" value="native" />
+            <param name="reducedEnd" value="reduced" />
+            <param name="massError" value="0.6" />
+            <param name="massErrorType" value="Da" />
+            <param name="adducts" value="MTFA-" />
+        </section>
+
+        <section name="hex_settings">
+            <param name="hexMin" value="0" />
+            <param name="hexMax" value="2" />
+            <param name="hexNAcMin" value="0" />
+            <param name="hexAMax" value="3" />
+            <param name="hexNMin" value="0" />
+            <param name="hexNMax" value="2" />
+            <param name="pentMin" value="0" />
+            <param name="pentMax" value="3" />
+        </section>
+
+        <section name="modifications">
+            <param name="acetylMin" value="0" />
+            <param name="acetylMax" value="2" />
+        </section>
+
+        <output name="output_csv">
+            <assert_contents>
+            <has_text text="(HexA)2 (Hex)2 (Acetyl)1" />
+            <has_text text="(HexA)3 (Pent)3" />
+            <has_text text="(HexN)2 (Acetyl)2" />
+            <has_text text="(HexA)1" />
+            <has_text text="(HexN)1 (Hex)1 (Acetyl)1" />
+            </assert_contents>
+        </output>
         </test>
-	<!-- InstantPC -->
+
+	<!-- InstantPC & MFA- -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -519,7 +522,7 @@ mkdir output_dir &&
 	    <param name="reducedEnd" value="instantpc" />
 	    <param name="massError" value="0.6" />
 	    <param name="massErrorType" value="Da" />
-	    <param name="adducts" value="Neutral" />
+	    <param name="adducts" value="MFA-" />
 	  </section>
 
 	  <section name="hex_settings">
@@ -543,7 +546,7 @@ mkdir output_dir &&
 	    </assert_contents>
 	  </output>
 	</test>
-	<!-- Rapifluor -->
+	<!-- Rapifluor & MAA+ -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -551,7 +554,7 @@ mkdir output_dir &&
 	    <param name="reducedEnd" value="rapifluor" />
 	    <param name="massError" value="0.6" />
 	    <param name="massErrorType" value="Da" />
-	    <param name="adducts" value="Neutral" />
+	    <param name="adducts" value="MAA-" />
 	  </section>
 
 	  <section name="hex_settings">
@@ -576,7 +579,7 @@ mkdir output_dir &&
 	    </assert_contents>
 	  </output>
 	</test>
-	<!-- 2aa -->
+	<!-- 2aa & MNH4 -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -584,7 +587,7 @@ mkdir output_dir &&
 	    <param name="reducedEnd" value="2aa" />
 	    <param name="massError" value="0.6" />
 	    <param name="massErrorType" value="Da" />
-	    <param name="adducts" value="Neutral" />
+	    <param name="adducts" value="MNH4+" />
 	  </section>
 	  <section name="hex_settings">
 	    <param name="hexMin" value="1" />
@@ -609,7 +612,7 @@ mkdir output_dir &&
 	  </output>
 	</test>
 
-	<!-- 2ab -->
+	<!-- 2ab & MK-->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -617,7 +620,7 @@ mkdir output_dir &&
 	    <param name="reducedEnd" value="2ab" />
 	    <param name="massError" value="0.6" />
 	    <param name="massErrorType" value="Da" />
-	    <param name="adducts" value="Neutral" />
+	    <param name="adducts" value="MK+" />
 	  </section>
 	  <section name="hex_settings">
 	    <param name="hexMin" value="1" />
@@ -639,7 +642,7 @@ mkdir output_dir &&
 	  </output>
 	</test>
 
-	<!-- Procainamide -->
+	<!-- Procainamide & Na -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -647,7 +650,7 @@ mkdir output_dir &&
 	    <param name="reducedEnd" value="procainamide" />
 	    <param name="massError" value="0.6" />
 	    <param name="massErrorType" value="Da" />
-	    <param name="adducts" value="Neutral" />
+	    <param name="adducts" value="MNa+" />
 	  </section>
 	  <section name="hex_settings">
 	    <param name="hexMin" value="0" />

@@ -1,5 +1,6 @@
 <macros>
     <xml name ="derivatisation">
+        # TODO: Grey out options that are not applicable to the selected reducing end.
         <option value="native">Native</option>
         <option value="permethylated">Permethylated</option>
         <option value="peracetylated">Peracetylated</option>
@@ -19,9 +20,10 @@
         <option value="Neutral">Neutral</option>
         <option value="MH+">MH+</option>
         <option value="MNa+">MNa+</option>
+        <option value="MK+">MK+</option>
         <option value="MNH4+">MNH4+</option>
         <option value="MH-">MH-</option>
-        <option value="MFA+">MFA+</option>
+        <option value="MFA+">MFA-</option>
         <option value="MAA-">MAA-</option>
         <option value="MTFA-">MTFA-</option>
         <option value="Custom">Custom</option>
