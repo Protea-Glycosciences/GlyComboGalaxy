@@ -451,10 +451,12 @@ mkdir output_dir &&
         </section>
     </inputs>
 
-	<outputs>
-	    <data name="output_csv" format="csv" from_work_dir="output_dir/result.csv" />
-	    <data name="output_txt" format="txt" from_work_dir="output_dir/parameter.txt" />
-	</outputs>
+    <outputs>
+    <collection name="output1" type="list" label="${tool.name} on ${on_string}: Results " >
+        <discover_datasets pattern="(?P&lt;designation&gt;.+)\.csv$" directory="output_dir" format="csv" visible="false"/>
+        <discover_datasets pattern="(?P&lt;designation&gt;.+)\.txt$" directory="output_dir" format="txt" visible="false"/>
+    </collection>
+    </outputs>
 
     <tests>
         <!-- Tests 1 - 8 cover all monosaccharides, modifications, reducing ends, and adducts.-->
@@ -474,7 +476,9 @@ mkdir output_dir &&
                 <param name="hexNAcMin" value="0" />
                 <param name="hexNAcMax" value="4" />
             </section>
-            <output name="output_csv" file="output_dir/result.csv" />
+            <output_collection name="output1">
+            	<element name="result" file="output_dir/result.csv" />
+            </output_collection>
         </test>
         <!-- #2 Reduced & MTFA+ -->
         <test>
@@ -503,7 +507,8 @@ mkdir output_dir &&
             <param name="acetylMax" value="2" />
         </section>
 
-        <output name="output_csv">
+	<output_collection name="output1">
+	    <element name="result">
             <assert_contents>
             <has_text text="(HexA)2 (Hex)2 (Acetyl)1" />
             <has_text text="(HexA)3 (Pent)3" />
@@ -511,8 +516,9 @@ mkdir output_dir &&
             <has_text text="(HexA)1" />
             <has_text text="(HexN)1 (Hex)1 (Acetyl)1" />
             </assert_contents>
-        </output>
-        </test>
+        </element>
+    </output_collection>
+    </test>
 
 	<!-- #3 InstantPC & MFA- -->
 	<test>
@@ -536,7 +542,8 @@ mkdir output_dir &&
 	    <param name="eeNeuAcMax" value="3" />
 	  </section>
 
-	  <output name="output_csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)3 (lNeuAc)1 (dNeuAc)1" />
 	      <has_text text="(eNeuAc)1" />
@@ -544,7 +551,8 @@ mkdir output_dir &&
 	      <has_text text="(lNeuAc)1 (eNeuAc)3 (dNeuAc)1" />
 	      <has_text text="(Hex)2 (dNeuAc)2" />
 	    </assert_contents>
-	  </output>
+        </element>
+	  </output_collection>
 	</test>
 	<!-- #4 Rapifluor & MAA+ -->
 	<test>
@@ -569,7 +577,8 @@ mkdir output_dir &&
 	    <param name="dNeuGcMax" value="2" />
 	  </section>
 
-	  <output name="output_csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)2 (amNeuAc)2 (eNeuGc)3" />
 	      <has_text text="(lNeuGc)2 (eNeuGc)3" />
@@ -577,7 +586,8 @@ mkdir output_dir &&
 	      <has_text text="(amNeuAc)1 (lNeuGc)2 (dNeuGc)1" />
 	      <has_text text="(Hex)1 (amNeuAc)3 (eNeuGc)1 (dNeuGc)1" />
 	    </assert_contents>
-	  </output>
+        </element>
+    </output_collection>
 	</test>
 	<!-- #5 2aa & MNH4 -->
 	<test>
@@ -602,14 +612,16 @@ mkdir output_dir &&
 	    <param name="phosMin" value="0" />
 	    <param name="phosMax" value="3" />
 	  </section>
-	  <output name="output_csv" file="dummy_output.csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)1 (amNeuGc)1" />
 	      <has_text text="(Hex)2 (Phos)1" />
 	      <has_text text="(Hex)3 (Phos)1 (amNeuGc)2" />
 	      <has_text text="(Hex)2 (Phos)3" />
 	    </assert_contents>
-	  </output>
+    </element>
+    </output_collection>
 	</test>
 
 	<!-- #6 2ab & MK-->
@@ -632,14 +644,16 @@ mkdir output_dir &&
 	    <param name="dHexNAcMin" value="0" />
 	    <param name="dHexNAcMax" value="3" />
 	  </section>
-	  <output name="output_csv" file="dummy_output.csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)1 (Sulf)1" />
 	      <has_text text="(Hex)2 (dHexNAc)3" />
 	      <has_text text="(Hex)3 (Sulf)2" />
 	      <has_text text="(Hex)2 (dHexNAc)2" />
 	    </assert_contents>
-	  </output>
+    </element>
+    </output_collection>
 	</test>
 
 	<!-- #7 Procainamide & Na -->
@@ -662,7 +676,8 @@ mkdir output_dir &&
 	    <param name="neu5GcMin" value="0" />
 	    <param name="neu5GcMax" value="3" />
 	  </section>
-	  <output name="output_csv" file="dummy_output.csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)2 (NeuGc)1" />
 	      <has_text text="(HexNAc)3" />
@@ -670,7 +685,8 @@ mkdir output_dir &&
 	      <has_text text="(HexNAc)2" />
 	      <has_text text="(Hex)4 (NeuGc)3" />
 	    </assert_contents>
-	  </output>
+	  </element>
+    </output_collection>
 	</test>
 
 	<!-- #8 GirP -->
@@ -693,7 +709,8 @@ mkdir output_dir &&
 	    <param name="neu5AcMin" value="0" />
 	    <param name="neu5AcMax" value="1" />
 	  </section>
-	  <output name="output_csv" file="dummy_output.csv">
+	<output_collection name="output1">
+	    <element name="result">
 	    <assert_contents>
 	      <has_text text="(Hex)3 (NeuAc)1 (HexNAc)1" />
 	      <has_text text="(HexNAc)3" />
@@ -701,7 +718,8 @@ mkdir output_dir &&
 	      <has_text text="(HexNAc)1" />
 	      <has_text text="(Hex)1 (NeuAc)1" />
 	    </assert_contents>
-	  </output>
+    </element>
+    </output_collection>
 	</test>
     <!-- Tests #9 - 10 Derivatisation -->
     <!-- #9 Permethylated -->
@@ -742,7 +760,8 @@ mkdir output_dir &&
         <param name="sulfMin" value="0" />
         <param name="sulfMax" value="1" />
     </section>
-    <output name="output_csv" file="dummy_output_deriv.csv">
+    	<output_collection name="output1">
+	    <element name="result">
         <assert_contents>
         <has_text text="(dHex)1 (HexN)1 (KDN)1 (Hex)1" />
         <has_text text="(HexA)1 (Pent)1" />
@@ -750,7 +769,8 @@ mkdir output_dir &&
         <has_text text="(Hex)1 (HexNAc)1 (Phos)1" />
         <has_text text="(Hex)1 (HexNAc)1 (Sulf)1" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #10 Peracetylated -->
     <test>
@@ -790,7 +810,8 @@ mkdir output_dir &&
         <param name="sulfMin" value="0" />
         <param name="sulfMax" value="1" />
     </section>
-    <output name="output_csv" file="dummy_output_deriv.csv">
+    <output_collection name="output1">
+	    <element name="result">
         <assert_contents>
         <has_text text="(dHex)1 (KDN)1 (Hex)1 (HexNAc/HexN)1" />
         <has_text text="(HexA)1 (Pent)1" />
@@ -798,7 +819,8 @@ mkdir output_dir &&
         <has_text text="(Hex)1 (HexNAc/HexN)1 (Phos)1" />
         <has_text text="(Hex)1 (HexNAc/HexN)1 (Sulf)1" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #11 Peracetylated HexN/HexNac-->
     <test>
@@ -836,7 +858,8 @@ mkdir output_dir &&
         <param name="sulfMin" value="0" />
         <param name="sulfMax" value="1" />
     </section>
-    <output name="output_csv" file="dummy_output_deriv.csv">
+   	<output_collection name="output1">
+	    <element name="result">
         <assert_contents>
         <has_text text="(dHex)1 (KDN)1 (Hex)1 (HexNAc)1" />
         <has_text text="(HexA)1 (Pent)1" />
@@ -844,7 +867,8 @@ mkdir output_dir &&
         <has_text text="(Hex)1 (HexNAc)1 (Phos)1" />
         <has_text text="(Hex)1 (HexNAc)1 (Sulf)1" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #12 Peracetylated HexN/HexNAc -->
     <test>
@@ -882,7 +906,8 @@ mkdir output_dir &&
         <param name="sulfMin" value="0" />
         <param name="sulfMax" value="1" />
     </section>
-    <output name="output_csv" file="dummy_output_deriv.csv">
+   	<output_collection name="output1">
+	    <element name="result">
         <assert_contents>
         <has_text text="(dHex)1 (KDN)1 (Hex)1 (HexN)1" />
         <has_text text="(HexA)1 (Pent)1" />
@@ -890,7 +915,8 @@ mkdir output_dir &&
         <has_text text="(Hex)1 (HexN)1 (Phos)1" />
         <has_text text="(Hex)1 (HexN)1 (Sulf)1" />
         </assert_contents>
-    </output>
+        </element>
+        </output_collection>
     </test>
     <!-- #13 Bruker -->
     <test>
@@ -900,27 +926,26 @@ mkdir output_dir &&
         <param name="reducedEnd" value="reduced" />
         <param name="massError" value="1.0" />
         <param name="massErrorType" value="Da" />
-        <param name="adducts" value="MH+" />
-        <param name="adducts" value="MH-" />
-        <param name="adducts" value="Neutral" />
     </section>
     <section name="hex_settings">
         <param name="hexMin" value="0" />
         <param name="hexMax" value="5" />
         <param name="hexNAcMin" value="0" />
         <param name="hexNAcMax" value="4" />
-        <param name="dhexMin" value="0" />
-        <param name="dhexMax" value="1" />
+        <param name="dHexMin" value="0" />
+        <param name="dHexMax" value="1" />
     </section>
     <section name="sialic_acid_settings">
         <param name="neu5AcMin" value="0" />
         <param name="neu5AcMax" value="2" />
     </section>
-    <output name="output_csv" file="vendor.csv">
+    	<output_collection name="output1">
+	    <element name="SkylineImport">
         <assert_contents>
         <has_text text="(dHex)1 (Hex)5 (NeuAc)2 (HexNAc)4" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #14 Agilent -->
     <test>
@@ -942,11 +967,13 @@ mkdir output_dir &&
         <param name="neu5AcMin" value="1" />
         <param name="neu5AcMax" value="1" />
     </section>
-    <output name="output_csv" file="vendor.csv">
+    	<output_collection name="output1">
+	    <element name="SkylineImport">
         <assert_contents>
         <has_text text="(Hex)5 (NeuAc)1 (HexNAc)4" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #15 Thermo -->
     <test>
@@ -964,11 +991,13 @@ mkdir output_dir &&
         <param name="hexNAcMin" value="2" />
         <param name="hexNAcMax" value="2" />
     </section>
-    <output name="output_csv" file="vendor.csv">
+    	<output_collection name="output1">
+	    <element name="SkylineImport">
         <assert_contents>
         <has_text text="(Hex)2 (HexNAc)2" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #16 Waters -->
     <test>
@@ -988,11 +1017,13 @@ mkdir output_dir &&
         <param name="neu5AcMin" value="1" />
         <param name="neu5AcMax" value="1" />
     </section>
-    <output name="output_csv" file="vendor.csv">
+    <output_collection name="output1">
+	    <element name="SkylineImport">
         <assert_contents>
         <has_text text="(Hex)2 (NeuAc)1" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     <!-- #17 Sciex -->
     <test>
@@ -1014,11 +1045,13 @@ mkdir output_dir &&
         <param name="neu5AcMin" value="2" />
         <param name="neu5AcMax" value="2" />
     </section>
-    <output name="output_csv" file="vendor.csv">
+    <output_collection name="output1">
+	    <element name="SkylineImport">
         <assert_contents>
         <has_text text="(Hex)5 (NeuAc)2 (HexNAc)4" />
         </assert_contents>
-    </output>
+    </element>
+    </output_collection>
     </test>
     </tests>
     <help>
