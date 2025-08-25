@@ -4,7 +4,7 @@
     </macros>
     <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
-        <container type="docker">proteaglycosciences/glycombocli:v6</container>
+        <container type="docker">proteaglycosciences/glycombocli:v14</container>
     </requirements>
     <command detect_errors="exit_code">
 <![CDATA[
@@ -458,7 +458,7 @@ mkdir output_dir &&
 
     <tests>
         <!-- Tests 1 - 8 cover all monosaccharides, modifications, reducing ends, and adducts.-->
-        <!--Free & MH- -->
+        <!-- #1 Free & MH- -->
         <test>
             <param name="input" value="text_test.txt" />
             <section name="general_settings">
@@ -476,7 +476,7 @@ mkdir output_dir &&
             </section>
             <output name="output_csv" file="output_dir/result.csv" />
         </test>
-        <!--Reduced & MTFA+ -->
+        <!-- #2 Reduced & MTFA+ -->
         <test>
         <param name="input" value="glycan_dummy_data.txt" />
         <section name="general_settings">
@@ -514,7 +514,7 @@ mkdir output_dir &&
         </output>
         </test>
 
-	<!-- InstantPC & MFA- -->
+	<!-- #3 InstantPC & MFA- -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -546,7 +546,7 @@ mkdir output_dir &&
 	    </assert_contents>
 	  </output>
 	</test>
-	<!-- Rapifluor & MAA+ -->
+	<!-- #4 Rapifluor & MAA+ -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -579,7 +579,7 @@ mkdir output_dir &&
 	    </assert_contents>
 	  </output>
 	</test>
-	<!-- 2aa & MNH4 -->
+	<!-- #5 2aa & MNH4 -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -612,7 +612,7 @@ mkdir output_dir &&
 	  </output>
 	</test>
 
-	<!-- 2ab & MK-->
+	<!-- #6 2ab & MK-->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -642,7 +642,7 @@ mkdir output_dir &&
 	  </output>
 	</test>
 
-	<!-- Procainamide & Na -->
+	<!-- #7 Procainamide & Na -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -673,7 +673,7 @@ mkdir output_dir &&
 	  </output>
 	</test>
 
-	<!-- GirP -->
+	<!-- #8 GirP -->
 	<test>
 	  <param name="input" value="glycan_dummy_data.txt" />
 	  <section name="general_settings">
@@ -703,8 +703,8 @@ mkdir output_dir &&
 	    </assert_contents>
 	  </output>
 	</test>
-    <!-- Tests #8 - 9 Derivatisation -->
-    <!-- Permethylated -->
+    <!-- Tests #9 - 10 Derivatisation -->
+    <!-- #9 Permethylated -->
     <test>
     <param name="input" value="glycan_dummy_deriv.txt" />
     <section name="general_settings">
@@ -752,7 +752,7 @@ mkdir output_dir &&
         </assert_contents>
     </output>
     </test>
-    <!-- Peracetylated -->
+    <!-- #10 Peracetylated -->
     <test>
     <param name="input" value="glycan_dummy_deriv.txt" />
     <section name="general_settings">
@@ -797,6 +797,226 @@ mkdir output_dir &&
         <has_text text="(NeuAc)1 (NeuGc)1 (HexNAc/HexN)1" />
         <has_text text="(Hex)1 (HexNAc/HexN)1 (Phos)1" />
         <has_text text="(Hex)1 (HexNAc/HexN)1 (Sulf)1" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #11 Peracetylated HexN/HexNac-->
+    <test>
+    <param name="input" value="glycan_dummy_deriv.txt" />
+    <section name="general_settings">
+        <param name="derivatisation" value="peracetylated" />
+        <param name="reducedEnd" value="free" />
+        <param name="massError" value="0.6" />
+        <param name="massErrorType" value="Da" />
+        <param name="adducts" value="Neutral" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="0" />
+        <param name="hexMax" value="1" />
+        <param name="dHexMin" value="0" />
+        <param name="dHexMax" value="1" />
+        <param name="hexAMin" value="0" />
+        <param name="hexAMax" value="1" />
+        <param name="pentMin" value="0" />
+        <param name="pentMax" value="1" />
+        <param name="hexNAcMin" value="0" />
+        <param name="hexNAcMax" value="1" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="kdnMin" value="0" />
+        <param name="kdnMax" value="1" />
+        <param name="neu5AcMin" value="0" />
+        <param name="neu5AcMax" value="1" />
+        <param name="neu5GcMin" value="0" />
+        <param name="neu5GcMax" value="1" />
+    </section>
+    <section name="modifications">
+        <param name="phosMin" value="0" />
+        <param name="phosMax" value="1" />
+        <param name="sulfMin" value="0" />
+        <param name="sulfMax" value="1" />
+    </section>
+    <output name="output_csv" file="dummy_output_deriv.csv">
+        <assert_contents>
+        <has_text text="(dHex)1 (KDN)1 (Hex)1 (HexNAc)1" />
+        <has_text text="(HexA)1 (Pent)1" />
+        <has_text text="(NeuAc)1 (NeuGc)1 (HexNAc)1" />
+        <has_text text="(Hex)1 (HexNAc)1 (Phos)1" />
+        <has_text text="(Hex)1 (HexNAc)1 (Sulf)1" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #12 Peracetylated HexN/HexNAc -->
+    <test>
+    <param name="input" value="glycan_dummy_deriv.txt" />
+    <section name="general_settings">
+        <param name="derivatisation" value="peracetylated" />
+        <param name="reducedEnd" value="free" />
+        <param name="massError" value="0.6" />
+        <param name="massErrorType" value="Da" />
+        <param name="adducts" value="Neutral" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="0" />
+        <param name="hexMax" value="1" />
+        <param name="dHexMin" value="0" />
+        <param name="dHexMax" value="1" />
+        <param name="hexNMin" value="0" />
+        <param name="hexNMax" value="1" />
+        <param name="hexAMin" value="0" />
+        <param name="hexAMax" value="1" />
+        <param name="pentMin" value="0" />
+        <param name="pentMax" value="1" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="kdnMin" value="0" />
+        <param name="kdnMax" value="1" />
+        <param name="neu5AcMin" value="0" />
+        <param name="neu5AcMax" value="1" />
+        <param name="neu5GcMin" value="0" />
+        <param name="neu5GcMax" value="1" />
+    </section>
+    <section name="modifications">
+        <param name="phosMin" value="0" />
+        <param name="phosMax" value="1" />
+        <param name="sulfMin" value="0" />
+        <param name="sulfMax" value="1" />
+    </section>
+    <output name="output_csv" file="dummy_output_deriv.csv">
+        <assert_contents>
+        <has_text text="(dHex)1 (KDN)1 (Hex)1 (HexN)1" />
+        <has_text text="(HexA)1 (Pent)1" />
+        <has_text text="(NeuAc)1 (NeuGc)1 (HexN)1" />
+        <has_text text="(Hex)1 (HexN)1 (Phos)1" />
+        <has_text text="(Hex)1 (HexN)1 (Sulf)1" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #13 Bruker -->
+    <test>
+    <param name="input" value="Bruker_Reduced.mzML" />
+    <section name="general_settings">
+        <param name="derivatisation" value="native" />
+        <param name="reducedEnd" value="reduced" />
+        <param name="massError" value="1.0" />
+        <param name="massErrorType" value="Da" />
+        <param name="adducts" value="MH+" />
+        <param name="adducts" value="MH-" />
+        <param name="adducts" value="Neutral" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="0" />
+        <param name="hexMax" value="5" />
+        <param name="hexNAcMin" value="0" />
+        <param name="hexNAcMax" value="4" />
+        <param name="dhexMin" value="0" />
+        <param name="dhexMax" value="1" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="neu5AcMin" value="0" />
+        <param name="neu5AcMax" value="2" />
+    </section>
+    <output name="output_csv" file="vendor.csv">
+        <assert_contents>
+        <has_text text="(dHex)1 (Hex)5 (NeuAc)2 (HexNAc)4" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #14 Agilent -->
+    <test>
+    <param name="input" value="Agilent_Free.mzML" />
+    <section name="general_settings">
+        <param name="derivatisation" value="native" />
+        <param name="reducedEnd" value="free" />
+        <param name="massError" value="20" />
+        <param name="massErrorType" value="ppm" />
+        <param name="adducts" value="MH+" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="5" />
+        <param name="hexMax" value="5" />
+        <param name="hexNAcMin" value="4" />
+        <param name="hexNAcMax" value="4" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="neu5AcMin" value="1" />
+        <param name="neu5AcMax" value="1" />
+    </section>
+    <output name="output_csv" file="vendor.csv">
+        <assert_contents>
+        <has_text text="(Hex)5 (NeuAc)1 (HexNAc)4" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #15 Thermo -->
+    <test>
+    <param name="input" value="Thermo_Reduced.mzML" />
+    <section name="general_settings">
+        <param name="derivatisation" value="native" />
+        <param name="reducedEnd" value="reduced" />
+        <param name="massError" value="0.6" />
+        <param name="massErrorType" value="Da" />
+        <param name="adducts" value="MH+" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="1" />
+        <param name="hexMax" value="2" />
+        <param name="hexNAcMin" value="2" />
+        <param name="hexNAcMax" value="2" />
+    </section>
+    <output name="output_csv" file="vendor.csv">
+        <assert_contents>
+        <has_text text="(Hex)2 (HexNAc)2" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #16 Waters -->
+    <test>
+    <param name="input" value="Waters_ProA.mzML" />
+    <section name="general_settings">
+        <param name="derivatisation" value="native" />
+        <param name="reducedEnd" value="procainamide" />
+        <param name="massError" value="50" />
+        <param name="massErrorType" value="ppm" />
+        <param name="adducts" value="Neutral" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="2" />
+        <param name="hexMax" value="2" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="neu5AcMin" value="1" />
+        <param name="neu5AcMax" value="1" />
+    </section>
+    <output name="output_csv" file="vendor.csv">
+        <assert_contents>
+        <has_text text="(Hex)2 (NeuAc)1" />
+        </assert_contents>
+    </output>
+    </test>
+    <!-- #17 Sciex -->
+    <test>
+    <param name="input" value="Sciex_ZenoTOF.mzML" />
+    <section name="general_settings">
+        <param name="derivatisation" value="native" />
+        <param name="reducedEnd" value="free" />
+        <param name="massError" value="20" />
+        <param name="massErrorType" value="ppm" />
+        <param name="adducts" value="Neutral" />
+    </section>
+    <section name="hex_settings">
+        <param name="hexMin" value="5" />
+        <param name="hexMax" value="5" />
+        <param name="hexNAcMin" value="4" />
+        <param name="hexNAcMax" value="4" />
+    </section>
+    <section name="sialic_acid_settings">
+        <param name="neu5AcMin" value="2" />
+        <param name="neu5AcMax" value="2" />
+    </section>
+    <output name="output_csv" file="vendor.csv">
+        <assert_contents>
+        <has_text text="(Hex)5 (NeuAc)2 (HexNAc)4" />
         </assert_contents>
     </output>
     </test>
