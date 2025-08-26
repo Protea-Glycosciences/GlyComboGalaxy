@@ -4,7 +4,7 @@
     </macros>
     <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
-        <container type="docker">proteaglycosciences/glycombocli:v14</container>
+        <container type="docker">proteaglycosciences/glycombocli:v15</container>
     </requirements>
     <command detect_errors="exit_code">
 <![CDATA[
@@ -462,7 +462,7 @@ mkdir output_dir &&
         <!-- Tests 1 - 8 cover all monosaccharides, modifications, reducing ends, and adducts.-->
         <!-- #1 Free & MH- -->
         <test>
-            <param name="input" value="text_test.txt" />
+            <param name="input" value="highman.txt" />
             <section name="general_settings">
                 <param name="derivatisation" value="native" />
                 <param name="reducedEnd" value="free" />
@@ -477,7 +477,7 @@ mkdir output_dir &&
                 <param name="hexNAcMax" value="4" />
             </section>
             <output_collection name="output1">
-            	<element name="result" file="output_dir/result.csv" />
+            	<element name="result" file="output_dir/highman_result.csv" />
             </output_collection>
         </test>
         <!-- #2 Reduced & MTFA+ -->
