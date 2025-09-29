@@ -1,4 +1,4 @@
-<tool id="glycombo" name="GlyCombo" version="0.1+galaxy.0" profile="20.01" license="Apache2.0">
+<tool id="glycombo" name="GlyCombo" version="@VERSION@+galaxy@VERSION_SUFFIX@" license="Apache2.0">
     <macros>
         <import>macros.xml</import>
     </macros>
