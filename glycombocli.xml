@@ -476,7 +476,7 @@ mkdir output_dir &&
                 <param name="reducedEnd" value="free" />
                 <param name="massError" value="0.6" />
                 <param name="massErrorType" value="Da" />
-                <param name="adducts" value="MH-" />
+                <param name="adducts" value="Neutral" />
             </section>
             <section name="hex_settings">
                 <param name="hexMin" value="0" />
