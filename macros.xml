@@ -1,4 +1,7 @@
 <macros>
+    <token name="@TOOL_VERSION@">v1</token>
+    <token name="@VERSION_SUFFIX@">0</token>
+    <token name="@PROFILE@">20.01</token>
     <xml name ="derivatisation">
         # TODO: Grey out options that are not applicable to the selected reducing end.
         <option value="native">Native</option>
