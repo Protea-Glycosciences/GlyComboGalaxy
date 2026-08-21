@@ -1,8 +1,8 @@
 <tool id="glycombo" name="GlyCombo" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" license="Apache2.0">
+	<description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <macros>
         <import>macros.xml</import>
     </macros>
-    <description>Identify glycan and polysaccharide compositions from mass spectrometry files</description>
     <requirements>
         <container type="docker">proteaglycosciences/glycombo:v1</container>
     </requirements>
