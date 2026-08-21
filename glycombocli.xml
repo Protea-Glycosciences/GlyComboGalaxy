@@ -1098,11 +1098,7 @@ mkdir output_dir &&
 
 ]]>
 </help>
-    <citations>
-        <citation type="bibtex"> article{doi:10.1021/jasms.4c00188, author = {Kelly, Maia I. and
-            Ashwood, Christopher}, title = {GlyCombo Enables Rapid, Complete Glycan Composition
-            Identification across Diverse Glycomic Sample Types}, journal = {Journal of the American
-            Society for Mass Spectrometry}, volume = {35}, number = {10}, pages = {2324-2330}, year
-            = {2024}, doi = {10.1021/jasms.4c00188}, note ={PMID: 39271475}, }</citation>
-    </citations>
+<citations>
+    <citation type="doi">10.1021/jasms.4c00188</citation>
+</citations>
 </tool>
