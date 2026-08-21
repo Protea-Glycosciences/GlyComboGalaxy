@@ -1,6 +1,7 @@
 <macros>
-    <token name="@TOOL_VERSION@">v1</token>
-    <token name="@VERSION_SUFFIX@">0</token>
+    <!-- Keep TOOL_VERSION synchronized with the immutable Docker tag. Increment VERSION_SUFFIX for Galaxy-wrapper-only revisions. -->
+    <token name="@TOOL_VERSION@">1.0.0</token>
+    <token name="@VERSION_SUFFIX@">1</token>
     <token name="@PROFILE@">20.01</token>
     <xml name ="derivatisation">
         # TODO: Grey out options that are not applicable to the selected reducing end.
