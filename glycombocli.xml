@@ -4,7 +4,7 @@
         <import>macros.xml</import>
     </macros>
     <xrefs>
-        <xref type="bio.tools">glycombo</xref>
+        <xref type="bio.tools">glycombocli</xref>
     </xrefs>
     <requirements>
         <container type="docker">proteaglycosciences/glycombo:@TOOL_VERSION@</container>
